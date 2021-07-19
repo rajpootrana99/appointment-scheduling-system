@@ -7,10 +7,14 @@
 			<!-- Logo -->
 			<div class="header-left">
 				<a href="{{ route('admin') }}" class="logo">
-					<img src="{{ asset('storage/'.$setting['logo'])}}" alt="Logo" width="300" height="50">
+                    @if(isset($setting['logo']))
+					    <img src="{{ asset('storage/'.$setting['logo'])}}" alt="Logo" width="300" height="50">
+                    @endif
 				</a>
 				<a href="{{ route('admin') }}" class="logo logo-small">
-					<img src="{{ asset('storage/'.$setting['logo'])}}" alt="Logo" width="300" height="50">
+                    @if(isset($setting['logo']))
+					    <img src="{{ asset('storage/'.$setting['logo'])}}" alt="Logo" width="300" height="50">
+                    @endif
                     <h4>Akram Khan</h4>
 				</a>
 			</div>

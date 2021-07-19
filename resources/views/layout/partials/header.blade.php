@@ -22,14 +22,18 @@
 							</span>
 						</a>
 						<a href="{{ route('index') }}" class="navbar-brand logo">
-							<img src="{{ asset('storage/'.$setting['logo'])}}" alt="Logo" width="80" height="50">
+                            @if(isset($setting['logo']))
+							    <img src="{{ asset('storage/'.$setting['logo'])}}" alt="Logo" width="80" height="50">
+                            @endif
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
 							<a href="{{ route('index') }}" class="menu-logo">
-								<img src="{{ asset('storage/'.$setting['logo'])}}" alt="Logo" width="80" height="50" class="img-fluid">
-							</a>
+                                @if(isset($setting['logo']))
+								    <img src="{{ asset('storage/'.$setting['logo'])}}" alt="Logo" width="80" height="50" class="img-fluid">
+                                @endif
+                            </a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
 								<i class="fas fa-times"></i>
 							</a>

@@ -1,7 +1,11 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-		<title>{{ $setting['website_name'] }}</title>
+        @if(isset($setting['website_name']))
+		    <title>{{ $setting['website_name'] }}</title>
+        @else
+            <title>Lawyer Time</title>
+        @endif
 		<!-- Favicons -->
 		<link type="image/x-icon" href="assets/img/favicon.png" rel="icon">
 		<!-- Bootstrap CSS -->
