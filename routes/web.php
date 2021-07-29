@@ -23,6 +23,7 @@ Route::middleware(['role:admin', 'auth'])->group(function () {
     Route::get('/admin', 'Admin\AdminController@index')->name('admin');
     Route::get('admin/appointment', 'Admin\AppointmentController@index')->name('appointment.index');
     Route::resource('admin/lawyerType', 'Admin\LawyerTypeController');
+    Route::post('admin/updateLawyerType', 'Admin\LawyerTypeController@updatelawyerType');
     Route::resource('admin/lawyerInformation', 'Admin\LawyerController');
     Route::get('admin/client', 'Admin\ClientController@index')->name('client.index');
     Route::get('admin/reviews', 'Admin\ReviewsController@index')->name('reviews.index');
@@ -55,7 +56,8 @@ Route::middleware(['role:user', 'auth'])->group(function () {
     Route::get('/profile-settings', 'User\UserController@profileSettings')->name('profile-settings');
     Route::get('/change-user-password', 'User\UserController@changeUserPassword')->name('change-user-password');
     Route::post('appointment/store', 'User\AppointmentController@store');
-
+    Route::resource('review', 'User\ReviewController');
 });
+Route::resource('lawyer', 'User\LawyerController');
 
 require __DIR__.'/auth.php';

@@ -50,4 +50,12 @@ class User extends Authenticatable
         return $this->hasMany(Appointment::class, 'lawyer_id', 'id');
     }
 
+    public function userReviews(){
+        return $this->hasMany(Review::class, 'user_id', 'id');
+    }
+
+    public function lawyerReviews(){
+        return $this->hasMany(Review::class, 'lawyer_id', 'id');
+    }
+
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\LawyerTypeRequest;
 use App\Http\Traits\GeneralTraits;
 use App\LawyerType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LawyerTypeController extends Controller
 {
@@ -40,11 +41,20 @@ class LawyerTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LawyerTypeRequest $request)
+    public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+        if (!$validator->passes()){
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        }
         $lawyerType = LawyerType::create($request->all());
         $this->storeImage($lawyerType);
-        return redirect(route('lawyerType.index'))->with('success', 'Lawyer Type created successfully');;
+        if ($lawyerType){
+            return response()->json(['status' => 1, 'msg' => 'Lawyer Type Added Successfully']);
+        }
+//        return redirect(route('lawyerType.index'))->with('success', 'Lawyer Type created successfully');
     }
 
     /**
@@ -78,7 +88,17 @@ class LawyerTypeController extends Controller
      */
     public function update(Request $request, LawyerType $lawyerType)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+        if (!$validator->passes()){
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        }
+        $lawyerType->update($request->all());
+        $this->storeImage($lawyerType);
+        if ($lawyerType){
+            return response()->json(['status' => 1, 'msg' => 'Lawyer Type Updated Successfully']);
+        }
     }
 
     /**
@@ -100,5 +120,20 @@ class LawyerTypeController extends Controller
         $lawyerType->update([
             'image' => $this->imagePath('image', 'lawyerType', $lawyerType),
         ]);
+    }
+
+    public function updatelawyerType(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+        if (!$validator->passes()){
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        }
+        $lawyerType = LawyerType::where('id', $request->id)->first();
+        $lawyerType->update($request->all());
+        $this->storeImage($lawyerType);
+        if ($lawyerType){
+            return response()->json(['status' => 1, 'msg' => 'Lawyer Type Updated Successfully']);
+        }
     }
 }

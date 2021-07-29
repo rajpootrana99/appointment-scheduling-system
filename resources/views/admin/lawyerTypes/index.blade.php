@@ -66,7 +66,7 @@
                                                                     <i class="fe fe-trash"></i> Delete
                                                                 </a>
                                                             </form>
-															<a class="btn btn-sm bg-success-light float-right mr-2" data-toggle="modal" href="#edit_specialities_details">
+															<a class="btn btn-sm bg-success-light float-right mr-2" data-toggle="modal" href="#edit_specialities_details" data-name="{{ $lawyerType->name }}" data-id="{{ $lawyerType->id }}">
 																<i class="fe fe-pencil"></i> Edit
 															</a>
 														</div>
@@ -96,17 +96,17 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<form method="post" action="{{ route('lawyerType.store') }}" enctype="multipart/form-data">
+							<form id="Add_Specialities_details_form" enctype="multipart/form-data">
                                 @csrf
 								<div class="row form-row">
-									<div class="col-12 col-sm-6">
+									<div class="col-12 col-sm-12">
 										<div class="form-group">
 											<label>Type Name</label>
 											<input type="text" name="name" class="form-control">
-                                            <div style="color: #ff0000; font-size: small;" class="mt-2">{{ $errors->first('name') }}</div>
+                                            <span class="text-danger error-text name_error"></span>
 										</div>
 									</div>
-                                    <div class="col-12 col-sm-6">
+                                    <div class="col-12 col-sm-12">
                                         <div class="form-group">
                                             <label>Image</label>
                                             <input type="file"  class="form-control" name="image">
@@ -126,24 +126,27 @@
 				<div class="modal-dialog modal-dialog-centered" role="document" >
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">Edit Specialities</h5>
+							<h5 class="modal-title">Edit Lawyer Type</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body">
-							<form>
+							<form id="edit_specialities_details_form">
+                                @csrf
 								<div class="row form-row">
-									<div class="col-12 col-sm-6">
+                                    <input type="hidden" name="id" id="id">
+									<div class="col-12 col-sm-12">
 										<div class="form-group">
-											<label>Specialities</label>
-											<input type="text" class="form-control" value="Cardiology">
+											<label>Type Name</label>
+											<input type="text" class="form-control" name="name" id="name">
+                                            <span class="text-danger error-text name_error"></span>
 										</div>
 									</div>
-									<div class="col-12 col-sm-6">
+									<div class="col-12 col-sm-12">
 										<div class="form-group">
 											<label>Image</label>
-											<input type="file"  class="form-control">
+											<input type="file" name="image" class="form-control">
 										</div>
 									</div>
 
@@ -180,4 +183,75 @@
 			<!-- /Delete Modal -->
         </div>
 		<!-- /Main Wrapper -->
+
+<script>
+    $(document).ready(function (){$('#edit_specialities_details').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var name = button.data('name')
+        var id = button.data('id')
+        var modal = $(this)
+        modal.find('.modal-body #name').val(name);
+        modal.find('.modal-body #id').val(id);
+    });
+        $('#Add_Specialities_details_form').on('submit', function (e){
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "lawyerType",
+                data: $('#Add_Specialities_details_form').serialize(),
+                dataType:'json',
+                beforeSend:function (){
+                    $(document).find('span.error-text').text('');
+                },
+                success: function (response) {
+                    if (response.status == 0){
+                        $('#Add_Specialities_details').modal('show')
+                        $.each(response.error, function (prefix, val){
+                            $('span.'+prefix+'_error').text(val[0]);
+                        });
+                    }else {
+                        $('#Add_Specialities_details_form')[0].reset();
+                        $('#Add_Specialities_details').modal('hide')
+                        alert("Lawyer Type Add Successfully")
+                    }
+                },
+                error: function (error){
+                    console.log(error)
+                    $('#Add_Specialities_details').modal('show')
+                    alert("Lawyer Type not added")
+                }
+            });
+        });
+
+        $('#edit_specialities_details_form').on('submit', function (e){
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "updateLawyerType",
+                data: $('#edit_specialities_details_form').serialize(),
+                dataType:'json',
+                beforeSend:function (){
+                    $(document).find('span.error-text').text('');
+                },
+                success: function (response) {
+                    if (response.status == 0){
+                        $('#edit_specialities_details').modal('show')
+                        $.each(response.error, function (prefix, val){
+                            $('span.'+prefix+'_error').text(val[0]);
+                        });
+                    }else {
+                        $('#edit_specialities_details_form')[0].reset();
+                        $('#edit_specialities_details').modal('hide')
+                        alert("Lawyer Type updated Successfully")
+                    }
+                },
+                error: function (error){
+                    console.log(error)
+                    $('#Add_Specialities_details').modal('show')
+                    alert("Lawyer Type not updated")
+                }
+            });
+        });
+    });
+</script>
 @endsection

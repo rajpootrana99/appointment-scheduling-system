@@ -106,7 +106,7 @@
 														<div class="upload-img">
 															<div class="change-photo-btn">
 																<span><i class="fa fa-upload"></i> Upload Photo</span>
-																<input type="file" class="upload">
+																<input type="file" name="image" class="upload">
 															</div>
 															<small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
 														</div>
@@ -116,13 +116,13 @@
 											<div class="col-12 col-md-12">
 												<div class="form-group">
 													<label>Name</label>
-													<input type="text" class="form-control" value="<?php echo e(Auth::user()->name); ?>">
+													<input type="text" class="form-control" name="name" value="<?php echo e(Auth::user()->name); ?>">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Email ID</label>
-													<input type="email" class="form-control" value="<?php echo e(Auth::user()->email); ?>">
+													<input type="email" class="form-control" name="email" value="<?php echo e(Auth::user()->email); ?>" readonly>
 												</div>
 											</div>
 											<div class="col-12 col-md-6">

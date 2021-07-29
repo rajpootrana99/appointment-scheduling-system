@@ -81,7 +81,7 @@
                                 @foreach($lawyers as $lawyer)
                                     <div class="profile-widget">
                                         <div class="doc-img">
-                                            <a href="doctor-profile">
+                                            <a href="{{ route('lawyer.show', ['lawyer' => $lawyer->user->id]) }}">
                                                 <img class="img-fluid" style="height: 200px" alt="User Image" src="{{ asset('storage/' .$lawyer->user->image) }}">
                                             </a>
                                             <a href="javascript:void(0)" class="fav-btn">
@@ -90,17 +90,17 @@
                                         </div>
                                         <div class="pro-content">
                                             <h3 class="title">
-                                                <a href="doctor-profile">{{ $lawyer->user->name }}</a>
+                                                <a href="{{ route('lawyer.show', ['lawyer' => $lawyer->user->id]) }}">{{ $lawyer->user->name }}</a>
                                                 <i class="fas fa-check-circle verified"></i>
                                             </h3>
                                             <p class="speciality">{{ $lawyer->education }} - {{ $lawyer->lawyerType->name }}</p>
                                             <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <span class="d-inline-block average-rating">(17)</span>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                <span class="d-inline-block average-rating">({{ count($lawyer->user->lawyerReviews) }})</span>
                                             </div>
                                             <ul class="available-info">
                                                 <li>
@@ -116,7 +116,7 @@
                                             </ul>
                                             <div class="row row-sm">
                                                 <div class="col-6">
-                                                    <a href="doctor-profile" class="btn view-btn">View Profile</a>
+                                                    <a href="{{ route('lawyer.show', ['lawyer' => $lawyer->user->id]) }}" class="btn view-btn">View Profile</a>
                                                 </div>
                                                 @can('book lawyer')
                                                     @if(Auth::check() || Auth::user()->hasRole(Config::get('constants.roles.User')))

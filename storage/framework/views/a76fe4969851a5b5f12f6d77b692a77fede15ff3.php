@@ -80,7 +80,7 @@
                                 <?php $__currentLoopData = $lawyers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lawyer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <div class="profile-widget">
                                         <div class="doc-img">
-                                            <a href="doctor-profile">
+                                            <a href="<?php echo e(route('lawyer.show', ['lawyer' => $lawyer->user->id])); ?>">
                                                 <img class="img-fluid" style="height: 200px" alt="User Image" src="<?php echo e(asset('storage/' .$lawyer->user->image)); ?>">
                                             </a>
                                             <a href="javascript:void(0)" class="fav-btn">
@@ -89,17 +89,17 @@
                                         </div>
                                         <div class="pro-content">
                                             <h3 class="title">
-                                                <a href="doctor-profile"><?php echo e($lawyer->user->name); ?></a>
+                                                <a href="<?php echo e(route('lawyer.show', ['lawyer' => $lawyer->user->id])); ?>"><?php echo e($lawyer->user->name); ?></a>
                                                 <i class="fas fa-check-circle verified"></i>
                                             </h3>
                                             <p class="speciality"><?php echo e($lawyer->education); ?> - <?php echo e($lawyer->lawyerType->name); ?></p>
                                             <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <span class="d-inline-block average-rating">(17)</span>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                    <i class="fas fa-star filled"></i>
+                                                <span class="d-inline-block average-rating">(<?php echo e(count($lawyer->user->lawyerReviews)); ?>)</span>
                                             </div>
                                             <ul class="available-info">
                                                 <li>
@@ -116,7 +116,7 @@
                                             </ul>
                                             <div class="row row-sm">
                                                 <div class="col-6">
-                                                    <a href="doctor-profile" class="btn view-btn">View Profile</a>
+                                                    <a href="<?php echo e(route('lawyer.show', ['lawyer' => $lawyer->user->id])); ?>" class="btn view-btn">View Profile</a>
                                                 </div>
                                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('book lawyer')): ?>
                                                     <?php if(Auth::check() || Auth::user()->hasRole(Config::get('constants.roles.User'))): ?>

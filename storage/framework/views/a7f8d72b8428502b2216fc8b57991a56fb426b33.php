@@ -116,4 +116,8 @@
 
 		<!-- Main CSS -->
         <link rel="stylesheet" href="<?php echo e(asset('assets_admin/css/style.css')); ?>">
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <?php /**PATH D:\Workspace\appointment-scheduling-system\resources\views/layout/partials/head_admin.blade.php ENDPATH**/ ?>

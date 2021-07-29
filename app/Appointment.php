@@ -25,8 +25,8 @@ class Appointment extends Model
     public function statusOptions(){
         return [
             0 => 'Pending',
-            1 => 'Confirmed',
-            2 => 'Rejected',
+            1 => 'Confirm',
+            2 => 'Reject',
         ];
     }
 

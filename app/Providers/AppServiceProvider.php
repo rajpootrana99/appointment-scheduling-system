@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Appointment;
 use App\LawyerInformation;
 use App\lawyerType;
+use App\Review;
 use App\Setting;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;

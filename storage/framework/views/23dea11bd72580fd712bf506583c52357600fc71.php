@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
@@ -35,42 +34,51 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../assets_admin/img/patients/patient1.jpg" alt="User Image"></a>
-															<a href="profile">Charlene Reed </a>
-														</h2>
-													</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../assets_admin/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
-															<a href="profile">Dr. Ruby Perrin</a>
-														</h2>
-													</td>
+                                                <?php $__currentLoopData = $reviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <tr>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <?php if(isset($review->user->image)): ?>
+                                                                    <a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$review->user->image)); ?>" alt="User Image"></a>
+                                                                <?php endif; ?>
+                                                                <a href="profile"><?php echo e($review->user->name); ?></a>
+                                                            </h2>
+                                                        </td>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <?php if(isset($review->lawyer->image)): ?>
+                                                                    <a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$review->lawyer->image)); ?>" alt="User Image"></a>
+                                                                <?php endif; ?>
+                                                                <a href="profile"><?php echo e($review->lawyer->name); ?></a>
+                                                            </h2>
+                                                        </td>
 
-													<td>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star text-warning"></i>
-														<i class="fe fe-star-o text-secondary"></i>
-													</td>
+                                                        <td>
+                                                            <?php $rating = $review->rating ; ?>
+                                                            <?php $remaining_rating = 5-$review->rating ; ?>
+                                                            <?php for($i = 1; $i <= $rating ; $i++): ?>
+                                                                <i class="fe fe-star text-warning"></i>
+                                                            <?php endfor; ?>
+                                                            <?php for($i = 1; $i <= $remaining_rating ; $i++): ?>
+                                                                <i class="fe fe-star-o text-secondary"></i>
+                                                            <?php endfor; ?>
+                                                        </td>
 
-													<td>
-														Lorem ipsum dolor sit amet, consectetur adipiscing elit
-													</td>
-														<td>3 Nov 2019 <br><small>09.59 AM</small></td>
-													<td class="text-right">
-														<div class="actions">
-															<a class="btn btn-sm bg-danger-light" data-toggle="modal" href="#delete_modal">
-																<i class="fe fe-trash"></i> Delete
-															</a>
+                                                        <td>
+                                                            <?php echo e($review->review); ?>
 
-														</div>
-													</td>
-												</tr>
+                                                        </td>
+                                                            <td><?php echo e($review->created_at); ?></td>
+                                                        <td class="text-right">
+                                                            <div class="actions">
+                                                                <a class="btn btn-sm bg-danger-light" data-toggle="modal" href="#delete_modal">
+                                                                    <i class="fe fe-trash"></i> Delete
+                                                                </a>
 
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 											</tbody>
 										</table>
 									</div>
