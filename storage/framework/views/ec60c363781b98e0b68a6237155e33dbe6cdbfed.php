@@ -31,40 +31,42 @@
 													<th>Client Name</th>
 													<th>Apointment Time</th>
 													<th>Status</th>
+                                                    <th>Action</th>
 												</tr>
 											</thead>
-                                            <?php if(count($appointments)): ?>
-                                                <tbody>
-                                                    <?php $__currentLoopData = $appointments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $appointment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <tr>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <?php if(isset($appointment->lawyer->image)): ?>
-                                                                    <a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$appointment->lawyer->image)); ?>" alt="User Image"></a>
-                                                                    <?php endif; ?>
-                                                                    <a href="profile"><?php echo e($appointment->lawyer->name); ?></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td><?php echo e($appointment->lawyerType->name); ?></td>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <?php if(isset($appointment->user->image)): ?>
-                                                                        <a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$appointment->user->image)); ?>" alt="User Image"></a>
-                                                                    <?php endif; ?>
-                                                                    <a href="profile"><?php echo e($appointment->user->name); ?></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td><?php echo e($appointment->appointment_date); ?> <span class="text-primary d-block"><?php echo e($appointment->appointment_time); ?></span></td>
-                                                            <td>
-                                                                <div class="status-toggle">
-                                                                    <input type="checkbox" id="status_1" class="check" checked>
-                                                                    <label for="status_1" class="checktoggle">checkbox</label>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                </tbody>
-                                            <?php endif; ?>
+                                            <tbody>
+                                                <?php $__currentLoopData = $appointments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $appointment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <tr>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <?php if(isset($appointment->lawyer->image)): ?>
+                                                                <a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$appointment->lawyer->image)); ?>" alt="User Image"></a>
+                                                                <?php endif; ?>
+                                                                <a href="profile"><?php echo e($appointment->lawyer->name); ?></a>
+                                                            </h2>
+                                                        </td>
+                                                        <td><?php echo e($appointment->lawyerType->name); ?></td>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <?php if(isset($appointment->user->image)): ?>
+                                                                    <a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$appointment->user->image)); ?>" alt="User Image"></a>
+                                                                <?php endif; ?>
+                                                                <a href="profile"><?php echo e($appointment->user->name); ?></a>
+                                                            </h2>
+                                                        </td>
+                                                        <td><?php echo e($appointment->appointment_date); ?> <span class="text-primary d-block"><?php echo e($appointment->appointment_time); ?></span></td>
+                                                        <?php if($appointment->status == 'Pending'): ?>
+                                                            <td><span class="badge badge-pill bg-info-light"><?php echo e($appointment->status); ?></span></td>
+                                                        <?php endif; ?>
+                                                        <?php if($appointment->status == 'Confirm'): ?>
+                                                            <td><span class="badge badge-pill bg-success-light"><?php echo e($appointment->status); ?></span></td>
+                                                        <?php endif; ?>
+                                                        <?php if($appointment->status == 'Reject'): ?>
+                                                            <td><span class="badge badge-pill bg-danger-light"><?php echo e($appointment->status); ?></span></td>
+                                                        <?php endif; ?>
+                                                    </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </tbody>
 										</table>
 									</div>
 								</div>

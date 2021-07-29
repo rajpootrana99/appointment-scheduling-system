@@ -45,16 +45,7 @@
                             @if(Auth::check())
                                 @if(Auth::user()->hasRole(Config::get('constants.roles.Lawyer')))
                                     <li class="has-submenu <?php if($page=="review" || $page=="register" || $page=="doctor-dashboard" || $page=="appointments" || $page=="schedule-timings" || $page=="my-patients" || $page=="patient-profile" || $page=="chat-doctor" || $page=="invoices" || $page=="doctor-profile-settings") { echo 'active'; } ?>">
-                                    <a href="">Lawyer <i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        <li class="<?php if($page=="index") { echo 'active'; } ?>"><a href="{{ route('lawyer') }}">Lawyer Dashboard</a></li>
-                                        <li class="<?php if($page=="appointments") { echo 'active'; } ?>"><a href="{{ route('appointments') }}">Appointments</a></li>
-                                        <li class="<?php if($page=="schedule-timings") { echo 'active'; } ?>"><a href="{{ route('schedule-timings') }}">Schedule Timing</a></li>
-                                        <li class="<?php if($page=="my-patients") { echo 'active'; } ?>"><a href="{{ route('my-clients') }}">Patients List</a></li>
-                                        <li class="<?php if($page=="patient-profile") { echo 'active'; } ?>"><a href="{{ route('client-profile') }}">Clients Profile</a></li>
-                                        <li class="<?php if($page=="doctor-profile-settings") { echo 'active'; } ?>"><a href="{{ route('profile-settings') }}">Profile Settings</a></li>
-                                        <li class="<?php if($page=="review") { echo 'active'; } ?>"><a href="{{ route('reviews') }}">Reviews</a></li>
-                                    </ul>
+                                    <a href="{{ route('lawyer') }}">Lawyer</a>
                                 </li>
                                 @endif
                             @endif

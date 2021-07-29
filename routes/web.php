@@ -42,7 +42,7 @@ Route::middleware(['role:lawyer', 'auth'])->group(function () {
     Route::get('/schedule-timings', 'Lawyer\LawyerController@scheduleTimings')->name('schedule-timings');
     Route::get('/my-clients', 'Lawyer\LawyerController@myClients')->name('my-clients');
     Route::get('/client-profile', 'Lawyer\LawyerController@clientProfile')->name('client-profile');
-    Route::get('/profile-settings', 'Lawyer\LawyerController@profileSettings')->name('profile-settings');
+    Route::get('/profile-setting', 'Lawyer\LawyerController@profileSettings')->name('profile-setting');
     Route::get('/change-lawyer-password', 'Lawyer\LawyerController@changeLawyerPassword')->name('change-lawyer-password');
     Route::get('/reviews', 'Lawyer\LawyerController@Reviews')->name('reviews');
 
@@ -61,6 +61,6 @@ Route::middleware(['role:user', 'auth'])->group(function () {
     Route::resource('review', 'User\ReviewController');
 
 });
-Route::resource('lawyer', 'User\LawyerController');
+Route::resource('lawyers', 'User\LawyerController');
 
 require __DIR__.'/auth.php';

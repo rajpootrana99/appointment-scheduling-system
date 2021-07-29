@@ -32,6 +32,7 @@
 													<th>Client Name</th>
 													<th>Apointment Time</th>
 													<th>Status</th>
+                                                    <th>Action</th>
 												</tr>
 											</thead>
                                             <tbody>
@@ -55,12 +56,15 @@
                                                             </h2>
                                                         </td>
                                                         <td>{{ $appointment->appointment_date }} <span class="text-primary d-block">{{ $appointment->appointment_time }}</span></td>
-                                                        <td>
-                                                            <div class="status-toggle">
-                                                                <input type="checkbox" id="status_1" class="check" checked>
-                                                                <label for="status_1" class="checktoggle">checkbox</label>
-                                                            </div>
-                                                        </td>
+                                                        @if($appointment->status == 'Pending')
+                                                            <td><span class="badge badge-pill bg-info-light">{{ $appointment->status }}</span></td>
+                                                        @endif
+                                                        @if($appointment->status == 'Confirm')
+                                                            <td><span class="badge badge-pill bg-success-light">{{ $appointment->status }}</span></td>
+                                                        @endif
+                                                        @if($appointment->status == 'Reject')
+                                                            <td><span class="badge badge-pill bg-danger-light">{{ $appointment->status }}</span></td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>

@@ -79,7 +79,7 @@
 												</a>
 											</li>
 											<li>
-												<a href="<?php echo e(route('profile-settings')); ?>">
+												<a href="<?php echo e(route('profile-setting')); ?>">
 													<i class="fas fa-user-cog"></i>
 													<span>Profile Settings</span>
 												</a>

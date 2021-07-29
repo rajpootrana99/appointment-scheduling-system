@@ -61,19 +61,13 @@
 												</a>
 											</li>
 											<li>
-												<a href="<?php echo e(route('schedule-timings')); ?>">
-													<i class="fas fa-hourglass-start"></i>
-													<span>Schedule Timings</span>
-												</a>
-											</li>
-											<li>
 												<a href="<?php echo e(route('reviews')); ?>">
 													<i class="fas fa-star"></i>
 													<span>Reviews</span>
 												</a>
 											</li>
 											<li>
-												<a href="<?php echo e(route('profile-settings')); ?>">
+												<a href="<?php echo e(route('profile-setting')); ?>">
 													<i class="fas fa-user-cog"></i>
 													<span>Profile Settings</span>
 												</a>

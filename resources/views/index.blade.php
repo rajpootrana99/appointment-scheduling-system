@@ -81,7 +81,7 @@
                                 @foreach($lawyers as $lawyer)
                                     <div class="profile-widget">
                                         <div class="doc-img">
-                                            <a href="{{ route('lawyer.show', ['lawyer' => $lawyer->user->id]) }}">
+                                            <a href="{{ route('lawyers.show', ['lawyer' => $lawyer->user->id]) }}">
                                                 @if(isset($lawyer->user->image))
                                                     <img class="img-fluid" style="height: 200px" alt="User Image" src="{{ asset('storage/' .$lawyer->user->image) }}">
                                                 @endif
@@ -92,7 +92,7 @@
                                         </div>
                                         <div class="pro-content">
                                             <h3 class="title">
-                                                <a href="{{ route('lawyer.show', ['lawyer' => $lawyer->user->id]) }}">{{ $lawyer->user->name }}</a>
+                                                <a href="{{ route('lawyers.show', ['lawyer' => $lawyer->user->id]) }}">{{ $lawyer->user->name }}</a>
                                                 <i class="fas fa-check-circle verified"></i>
                                             </h3>
                                             <p class="speciality">{{ $lawyer->education }} - {{ $lawyer->lawyerType->name }}</p>
@@ -118,7 +118,7 @@
                                             </ul>
                                             <div class="row row-sm">
                                                 <div class="col-6">
-                                                    <a href="{{ route('lawyer.show', ['lawyer' => $lawyer->user->id]) }}" class="btn view-btn">View Profile</a>
+                                                    <a href="{{ route('lawyers.show', ['lawyer' => $lawyer->user->id]) }}" class="btn view-btn">View Profile</a>
                                                 </div>
                                                 @can('book lawyer')
                                                     @if(Auth::check() || Auth::user()->hasRole(Config::get('constants.roles.User')))

@@ -64,12 +64,6 @@
                                                     <span>My Clients</span>
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="{{ route('schedule-timings') }}">
-                                                    <i class="fas fa-hourglass-start"></i>
-                                                    <span>Schedule Timings</span>
-                                                </a>
-                                            </li>
                                             <li class="active">
                                                 <a href="{{ route('reviews') }}">
                                                     <i class="fas fa-star"></i>
@@ -77,7 +71,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('profile-settings')}}">
+                                                <a href="{{ route('profile-setting')}}">
                                                     <i class="fas fa-user-cog"></i>
                                                     <span>Profile Settings</span>
                                                 </a>
@@ -112,323 +106,35 @@
 								<ul class="comments-list">
 
 									<!-- Comment List -->
-									<li>
-										<div class="comment">
-											<img class="avatar rounded-circle" alt="User Image" src="assets/img/patients/patient.jpg">
-											<div class="comment-body">
-												<div class="meta-data">
-													<span class="comment-author">Richard Wilson</span>
-													<span class="comment-date">Reviewed 2 Days ago</span>
-													<div class="review-count rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star"></i>
-													</div>
-												</div>
-												<p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p>
-												<p class="comment-content">
-													Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-													sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-													Ut enim ad minim veniam, quis nostrud exercitation.
-													Curabitur non nulla sit amet nisl tempus
-												</p>
-												<div class="comment-reply">
-													<a class="comment-btn" href="#">
-														<i class="fas fa-reply"></i> Reply
-													</a>
-												   <p class="recommend-btn">
-													<span>Recommend?</span>
-													<a href="#" class="like-btn">
-														<i class="far fa-thumbs-up"></i> Yes
-													</a>
-													<a href="#" class="dislike-btn">
-														<i class="far fa-thumbs-down"></i> No
-													</a>
-												</p>
-												</div>
-											</div>
-										</div>
-
-										<!-- Comment Reply -->
-										<ul class="comments-reply">
-
-											<!-- Comment Reply List -->
-											<li>
-												<div class="comment">
-													<img class="avatar rounded-circle" alt="User Image" src="assets/img/doctors/doctor-thumb-02.jpg">
-													<div class="comment-body">
-														<div class="meta-data">
-															<span class="comment-author">Dr. Darren Elder</span>
-															<span class="comment-date">Reviewed 3 Days ago</span>
-														</div>
-														<p class="comment-content">
-															Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-															sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-															Ut enim ad minim veniam.
-															Curabitur non nulla sit amet nisl tempus
-														</p>
-														<div class="comment-reply">
-															<a class="comment-btn" href="#">
-																<i class="fas fa-reply"></i> Reply
-															</a>
-														</div>
-													</div>
-												</div>
-											</li>
-											<!-- /Comment Reply List -->
-
-										</ul>
-										<!-- /Comment Reply -->
-
-									</li>
-									<!-- /Comment List -->
-
-									<!-- Comment List -->
-									<li>
-										<div class="comment">
-											<img class="avatar rounded-circle" alt="User Image" src="assets/img/patients/patient2.jpg">
-											<div class="comment-body">
-												<div class="meta-data">
-													<span class="comment-author">Travis Trimble</span>
-													<span class="comment-date">Reviewed 4 Days ago</span>
-													<div class="review-count rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-													</div>
-												</div>
-												<p class="comment-content">
-													Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-													sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-													Ut enim ad minim veniam, quis nostrud exercitation.
-													Curabitur non nulla sit amet nisl tempus
-												</p>
-												<div class="comment-reply">
-													<a class="comment-btn" href="#">
-														<i class="fas fa-reply"></i> Reply
-													</a>
-													<p class="recommend-btn">
-														<span>Recommend?</span>
-														<a href="#" class="like-btn">
-															<i class="far fa-thumbs-up"></i> Yes
-														</a>
-														<a href="#" class="dislike-btn">
-															<i class="far fa-thumbs-down"></i> No
-														</a>
-													</p>
-												</div>
-											</div>
-										</div>
-									</li>
-									<!-- /Comment List -->
-
-									<!-- Comment List -->
-									<li>
-										<div class="comment">
-											<img class="avatar rounded-circle" alt="User Image" src="assets/img/patients/patient3.jpg">
-											<div class="comment-body">
-												<div class="meta-data">
-													<span class="comment-author">Carl Kelly</span>
-													<span class="comment-date">Reviewed 5 Days ago</span>
-													<div class="review-count rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-													</div>
-												</div>
-												<p class="comment-content">
-													Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-													sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-													Ut enim ad minim veniam, quis nostrud exercitation.
-													Curabitur non nulla sit amet nisl tempus
-												</p>
-												<div class="comment-reply">
-													<a class="comment-btn" href="#">
-														<i class="fas fa-reply"></i> Reply
-													</a>
-													<p class="recommend-btn">
-														<span>Recommend?</span>
-														<a href="#" class="like-btn">
-															<i class="far fa-thumbs-up"></i> Yes
-														</a>
-														<a href="#" class="dislike-btn">
-															<i class="far fa-thumbs-down"></i> No
-														</a>
-													</p>
-												</div>
-											</div>
-										</div>
-									</li>
-									<!-- /Comment List -->
-
-									<!-- Comment List -->
-									<li>
-										<div class="comment">
-											<img class="avatar rounded-circle" alt="User Image" src="assets/img/patients/patient4.jpg">
-											<div class="comment-body">
-												<div class="meta-data">
-													<span class="comment-author">Michelle Fairfax</span>
-													<span class="comment-date">Reviewed 6 Days ago</span>
-													<div class="review-count rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-													</div>
-												</div>
-												<p class="comment-content">
-													Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-													sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-													Ut enim ad minim veniam, quis nostrud exercitation.
-													Curabitur non nulla sit amet nisl tempus
-												</p>
-												<div class="comment-reply">
-													<a class="comment-btn" href="#">
-														<i class="fas fa-reply"></i> Reply
-													</a>
-													<p class="recommend-btn">
-														<span>Recommend?</span>
-														<a href="#" class="like-btn">
-															<i class="far fa-thumbs-up"></i> Yes
-														</a>
-														<a href="#" class="dislike-btn">
-															<i class="far fa-thumbs-down"></i> No
-														</a>
-													</p>
-												</div>
-											</div>
-										</div>
-									</li>
-									<!-- /Comment List -->
-
-									<!-- Comment List -->
-									<li>
-										<div class="comment">
-											<img class="avatar rounded-circle" alt="User Image" src="assets/img/patients/patient5.jpg">
-											<div class="comment-body">
-												<div class="meta-data">
-													<span class="comment-author">Gina Moore</span>
-													<span class="comment-date">Reviewed 1 Week ago</span>
-													<div class="review-count rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-													</div>
-												</div>
-												<p class="comment-content">
-													Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-													sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-													Ut enim ad minim veniam, quis nostrud exercitation.
-													Curabitur non nulla sit amet nisl tempus
-												</p>
-												<div class="comment-reply">
-													<a class="comment-btn" href="#">
-														<i class="fas fa-reply"></i> Reply
-													</a>
-													<p class="recommend-btn">
-														<span>Recommend?</span>
-														<a href="#" class="like-btn">
-															<i class="far fa-thumbs-up"></i> Yes
-														</a>
-														<a href="#" class="dislike-btn">
-															<i class="far fa-thumbs-down"></i> No
-														</a>
-													</p>
-												</div>
-											</div>
-										</div>
-									</li>
-									<!-- /Comment List -->
-
-									<!-- Comment List -->
-									<li>
-										<div class="comment">
-											<img class="avatar rounded-circle" alt="User Image" src="assets/img/patients/patient9.jpg">
-											<div class="comment-body">
-												<div class="meta-data">
-													<span class="comment-author">Walter Roberson</span>
-													<span class="comment-date">Reviewed 1 Week ago</span>
-													<div class="review-count rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-													</div>
-												</div>
-												<p class="comment-content">
-													Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-													sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-													Ut enim ad minim veniam, quis nostrud exercitation.
-													Curabitur non nulla sit amet nisl tempus
-												</p>
-												<div class="comment-reply">
-													<a class="comment-btn" href="#">
-														<i class="fas fa-reply"></i> Reply
-													</a>
-													<p class="recommend-btn">
-														<span>Recommend?</span>
-														<a href="#" class="like-btn">
-															<i class="far fa-thumbs-up"></i> Yes
-														</a>
-														<a href="#" class="dislike-btn">
-															<i class="far fa-thumbs-down"></i> No
-														</a>
-													</p>
-												</div>
-											</div>
-										</div>
-									</li>
-									<!-- /Comment List -->
-
-									<!-- Comment List -->
-									<li>
-										<div class="comment">
-											<img class="avatar rounded-circle" alt="User Image" src="assets/img/patients/patient8.jpg">
-											<div class="comment-body">
-												<div class="meta-data">
-													<span class="comment-author">Daniel Griffing</span>
-													<span class="comment-date">Reviewed on 1 Nov 2019</span>
-													<div class="review-count rating">
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-														<i class="fas fa-star filled"></i>
-													</div>
-												</div>
-												<p class="comment-content">
-													Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-													sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-													Ut enim ad minim veniam, quis nostrud exercitation.
-													Curabitur non nulla sit amet nisl tempus
-												</p>
-												<div class="comment-reply">
-													<a class="comment-btn" href="#">
-														<i class="fas fa-reply"></i> Reply
-													</a>
-													<p class="recommend-btn">
-														<span>Recommend?</span>
-														<a href="#" class="like-btn">
-															<i class="far fa-thumbs-up"></i> Yes
-														</a>
-														<a href="#" class="dislike-btn">
-															<i class="far fa-thumbs-down"></i> No
-														</a>
-													</p>
-												</div>
-											</div>
-										</div>
-									</li>
+                                    @foreach($reviews as $review)
+                                        <li>
+                                            <div class="comment">
+                                                @if(isset($review->user->image))
+                                                    <img class="avatar rounded-circle" alt="User Image" src="{{ asset('storage/'.$review->user->image) }}">
+                                                @endif
+                                                <div class="comment-body">
+                                                    <div class="meta-data">
+                                                        <span class="comment-author">{{ $review->user->name }}</span>
+                                                        <span class="comment-date">Reviewed 2 Days ago</span>
+                                                        <div class="review-count rating">
+                                                            <?php $rating = $review->rating ; ?>
+                                                            <?php $remaining_rating = 5-$review->rating ; ?>
+                                                            @for ($i = 1; $i <= $rating ; $i++)
+                                                                <i class="fas fa-star filled"></i>
+                                                            @endfor
+                                                            @for ($i = 1; $i <= $remaining_rating ; $i++)
+                                                                <i class="fas fa-star"></i>
+                                                            @endfor
+                                                        </div>
+                                                    </div>
+                                                    <p class="recommended"><i class="far fa-thumbs-up"></i> {{ $review->title }}</p>
+                                                    <p class="comment-content">
+                                                        {{ $review->review }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
 									<!-- /Comment List -->
 
 								</ul>

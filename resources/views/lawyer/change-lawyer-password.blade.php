@@ -62,19 +62,13 @@
 												</a>
 											</li>
 											<li>
-												<a href="{{ route('schedule-timings') }}">
-													<i class="fas fa-hourglass-start"></i>
-													<span>Schedule Timings</span>
-												</a>
-											</li>
-											<li>
 												<a href="{{ route('reviews') }}">
 													<i class="fas fa-star"></i>
 													<span>Reviews</span>
 												</a>
 											</li>
 											<li>
-												<a href="{{ route('profile-settings')}}">
+												<a href="{{ route('profile-setting')}}">
 													<i class="fas fa-user-cog"></i>
 													<span>Profile Settings</span>
 												</a>
