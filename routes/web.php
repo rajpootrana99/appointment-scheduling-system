@@ -54,9 +54,12 @@ Route::middleware(['role:user', 'auth'])->group(function () {
     Route::get('/user', 'User\UserController@index')->name('user');
     Route::get('/favourites', 'User\UserController@favourites')->name('favourites');
     Route::get('/profile-settings', 'User\UserController@profileSettings')->name('profile-settings');
+    Route::post('/profile-settings', 'User\UserController@store')->name('profile-settings.store');
     Route::get('/change-user-password', 'User\UserController@changeUserPassword')->name('change-user-password');
+    Route::post('change-user-password', 'User\UserController@updatePassword')->name('change-user-password.updatePassword');
     Route::post('appointment/store', 'User\AppointmentController@store');
     Route::resource('review', 'User\ReviewController');
+
 });
 Route::resource('lawyer', 'User\LawyerController');
 

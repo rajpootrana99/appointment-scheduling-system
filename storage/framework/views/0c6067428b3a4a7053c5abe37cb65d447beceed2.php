@@ -71,10 +71,6 @@
 										</ul>
 									</li>
 									<li class="<?php if($page=="search1") { echo 'active'; } ?>"><a href="search">Search Lawyer</a></li>
-									<li class="<?php if($page=="doctor-profile") { echo 'active'; } ?>"><a href="lawyer-profile">Lawyer Profile</a></li>
-									<li class="<?php if($page=="booking") { echo 'active'; } ?>"><a href="booking">Booking</a></li>
-									<li class="<?php if($page=="checkout") { echo 'active'; } ?>"><a href="checkout">Checkout</a></li>
-									<li class="<?php if($page=="booking-success") { echo 'active'; } ?>"><a href="booking-success">Booking Success</a></li>
 									<li class="<?php if($page=="patient-dashboard") { echo 'active'; } ?>"><a href="<?php echo e(route('user')); ?>">Dashboard</a></li>
 									<li class="<?php if($page=="favourites") { echo 'active'; } ?>"><a href="<?php echo e(route('favourites')); ?>">Favourites</a></li>
 									<li class="<?php if($page=="profile-settings") { echo 'active'; } ?>"><a href="<?php echo e(route('profile-settings')); ?>">Profile Settings</a></li>

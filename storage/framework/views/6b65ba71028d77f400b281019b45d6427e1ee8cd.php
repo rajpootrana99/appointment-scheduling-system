@@ -90,22 +90,38 @@
 						<div class="col-md-7 col-lg-8 col-xl-9">
 							<div class="card">
 								<div class="card-body">
+                                    <?php if(\Session::has('success')): ?>
+                                        <div class="alert alert-success border-0" role="alert">
+                                            <strong>Success!</strong> <?php echo e(\Session::get('success')); ?>
+
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if(\Session::has('error')): ?>
+                                        <div class="alert alert-danger border-0" role="alert">
+                                            <strong>Error!</strong> <?php echo e(\Session::get('error')); ?>
+
+                                        </div>
+                                    <?php endif; ?>
 									<div class="row">
 										<div class="col-md-12 col-lg-6">
 
 											<!-- Change Password Form -->
-											<form>
+											<form method="post" action="<?php echo e(route('change-user-password.updatePassword')); ?>">
+                                                <?php echo csrf_field(); ?>
 												<div class="form-group">
 													<label>Old Password</label>
-													<input type="password" class="form-control">
+													<input type="password"  name="old_password" class="form-control">
+                                                    <div style="color: #ff0000; font-size: small;" class="mt-2"><?php echo e($errors->first('old_password')); ?></div>
 												</div>
 												<div class="form-group">
 													<label>New Password</label>
-													<input type="password" class="form-control">
+													<input type="password" name="new_password" class="form-control">
+                                                    <div style="color: #ff0000; font-size: small;" class="mt-2"><?php echo e($errors->first('new_password')); ?></div>
 												</div>
 												<div class="form-group">
 													<label>Confirm Password</label>
-													<input type="password" class="form-control">
+													<input type="password" name="password_confirmation" class="form-control">
+                                                    <div style="color: #ff0000; font-size: small;" class="mt-2"><?php echo e($errors->first('password_confirmation')); ?></div>
 												</div>
 												<div class="submit-section">
 													<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>

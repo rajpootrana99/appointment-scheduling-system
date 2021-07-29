@@ -29,7 +29,7 @@
 							<div class="profile-sidebar">
 								<div class="widget-profile pro-widget-content">
 									<div class="profile-info-widget">
-										<<a href="#" class="booking-doc-img">
+										<a href="#" class="booking-doc-img">
                                             @if(isset(Auth::user()->image))
                                                 <img src="{{ asset('storage/'.Auth::user()->image) }}" alt="User Image">
                                             @else
@@ -91,7 +91,7 @@
 								<div class="card-body">
 
 									<!-- Profile Settings Form -->
-									<form>
+									<form method="post" action="{{ route('profile-settings.store') }}" enctype="multipart/form-data">
                                         @csrf
 										<div class="row form-row">
 											<div class="col-12 col-md-12">
@@ -118,18 +118,21 @@
 												<div class="form-group">
 													<label>Name</label>
 													<input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}">
+                                                    <div style="color: #ff0000; font-size: small;" class="mt-2">{{ $errors->first('name') }}</div>
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Email ID</label>
 													<input type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" readonly>
+                                                    <div style="color: #ff0000; font-size: small;" class="mt-2">{{ $errors->first('email') }}</div>
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="form-group">
 													<label>Mobile</label>
 													<input type="text" value="{{ Auth::user()->phone }}" name="phone" class="form-control">
+                                                    <div style="color: #ff0000; font-size: small;" class="mt-2">{{ $errors->first('phone') }}</div>
 												</div>
 											</div>
 										</div>

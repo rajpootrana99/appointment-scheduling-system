@@ -82,7 +82,9 @@
                                     <div class="profile-widget">
                                         <div class="doc-img">
                                             <a href="{{ route('lawyer.show', ['lawyer' => $lawyer->user->id]) }}">
-                                                <img class="img-fluid" style="height: 200px" alt="User Image" src="{{ asset('storage/' .$lawyer->user->image) }}">
+                                                @if(isset($lawyer->user->image))
+                                                    <img class="img-fluid" style="height: 200px" alt="User Image" src="{{ asset('storage/' .$lawyer->user->image) }}">
+                                                @endif
                                             </a>
                                             <a href="javascript:void(0)" class="fav-btn">
                                                 <i class="far fa-bookmark"></i>

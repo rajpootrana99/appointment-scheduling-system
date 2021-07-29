@@ -90,22 +90,36 @@
 						<div class="col-md-7 col-lg-8 col-xl-9">
 							<div class="card">
 								<div class="card-body">
+                                    @if(\Session::has('success'))
+                                        <div class="alert alert-success border-0" role="alert">
+                                            <strong>Success!</strong> {{ \Session::get('success') }}
+                                        </div>
+                                    @endif
+                                    @if(\Session::has('error'))
+                                        <div class="alert alert-danger border-0" role="alert">
+                                            <strong>Error!</strong> {{ \Session::get('error') }}
+                                        </div>
+                                    @endif
 									<div class="row">
 										<div class="col-md-12 col-lg-6">
 
 											<!-- Change Password Form -->
-											<form>
+											<form method="post" action="{{ route('change-user-password.updatePassword') }}">
+                                                @csrf
 												<div class="form-group">
 													<label>Old Password</label>
-													<input type="password" class="form-control">
+													<input type="password"  name="old_password" class="form-control">
+                                                    <div style="color: #ff0000; font-size: small;" class="mt-2">{{ $errors->first('old_password') }}</div>
 												</div>
 												<div class="form-group">
 													<label>New Password</label>
-													<input type="password" class="form-control">
+													<input type="password" name="new_password" class="form-control">
+                                                    <div style="color: #ff0000; font-size: small;" class="mt-2">{{ $errors->first('new_password') }}</div>
 												</div>
 												<div class="form-group">
 													<label>Confirm Password</label>
-													<input type="password" class="form-control">
+													<input type="password" name="password_confirmation" class="form-control">
+                                                    <div style="color: #ff0000; font-size: small;" class="mt-2">{{ $errors->first('password_confirmation') }}</div>
 												</div>
 												<div class="submit-section">
 													<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>

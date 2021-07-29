@@ -81,7 +81,9 @@
                                     <div class="profile-widget">
                                         <div class="doc-img">
                                             <a href="<?php echo e(route('lawyer.show', ['lawyer' => $lawyer->user->id])); ?>">
-                                                <img class="img-fluid" style="height: 200px" alt="User Image" src="<?php echo e(asset('storage/' .$lawyer->user->image)); ?>">
+                                                <?php if(isset($lawyer->user->image)): ?>
+                                                    <img class="img-fluid" style="height: 200px" alt="User Image" src="<?php echo e(asset('storage/' .$lawyer->user->image)); ?>">
+                                                <?php endif; ?>
                                             </a>
                                             <a href="javascript:void(0)" class="fav-btn">
                                                 <i class="far fa-bookmark"></i>

@@ -55,7 +55,11 @@
                                     @if(Auth::check() || Auth::user()->hasRole(Config::get('constants.roles.User')))
                                         <div class="doc-info-right">
                                             <div class="clinic-booking">
-                                                <a class="apt-btn" href="booking">Book Appointment</a>
+                                                @can('book lawyer')
+                                                    @if(Auth::check() || Auth::user()->hasRole(Config::get('constants.roles.User')))
+                                                        <a href="#book_lawyer" data-lawyer="{{ $lawyer->user->id }}" data-type="{{ $lawyer->lawyerType->id }}" data-toggle="modal" class="apt-btn">Book Appointment</a>
+                                                    @endif
+                                                @endcan
                                             </div>
                                         </div>
                                     @endif
@@ -263,8 +267,81 @@
 			</div>
             <!-- /Page Content -->
 </div>
+<div class="modal fade" id="book_lawyer" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Book Lawyer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="book_lawyer_form">
+                    @csrf
+                    <input type="hidden" name="lawyer_id" id="lawyer_id">
+                    <input type="hidden" name="lawyer_type_id" id="lawyer_type_id">
+                    <div class="row form-row">
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Select Date</label>
+                                <input type="date" name="appointment_date" class="form-control">
+                                <span class="text-danger error-text appointment_date_error"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Select Time</label>
+                                <input type="time" name="appointment_time" class="form-control">
+                                <span class="text-danger error-text appointment_time_error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Book Lawyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function (){
+        $('#book_lawyer').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var lawyer_id = button.data('lawyer')
+            var lawyer_type_id = button.data('type')
+            var modal = $(this)
+            modal.find('.modal-body #lawyer_id').val(lawyer_id);
+            modal.find('.modal-body #lawyer_type_id').val(lawyer_type_id);
+        });
+        $('#book_lawyer_form').on('submit', function (e){
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "appointment/store",
+                data: $('#book_lawyer_form').serialize(),
+                dataType:'json',
+                beforeSend:function (){
+                    $(document).find('span.error-text').text('');
+                },
+                success: function (response) {
+                    if (response.status == 0){
+                        $('#book_lawyer').modal('show')
+                        $.each(response.error, function (prefix, val){
+                            $('span.'+prefix+'_error').text(val[0]);
+                        });
+                    }else {
+                        $('#book_lawyer_form')[0].reset();
+                        $('#book_lawyer').modal('hide')
+                        alert("Appointment Booked ")
+                    }
+                },
+                error: function (error){
+                    console.log(error)
+                    $('#book_lawyer').modal('show')
+                    alert("Appointment not booked")
+                }
+            });
+        });
         $('#review_form').on('submit', function (e){
             e.preventDefault();
             $.ajax({
