@@ -31,7 +31,7 @@
 													<th>Client Name</th>
 													<th>Apointment Time</th>
 													<th>Status</th>
-                                                    <th>Action</th>
+                                                    <th class="text-center">Action</th>
 												</tr>
 											</thead>
                                             <tbody>
@@ -64,6 +64,31 @@
                                                         <?php if($appointment->status == 'Reject'): ?>
                                                             <td><span class="badge badge-pill bg-danger-light"><?php echo e($appointment->status); ?></span></td>
                                                         <?php endif; ?>
+                                                        <td class="text-center">
+                                                            <div class="dropdown d-inline-block">
+                                                                <a class="dropdown-toggle arrow-none" id="dLabel11" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                                                    <i class="las la-ellipsis-v font-20 text-muted"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel11">
+                                                                    <?php if($appointment->status != 'Reject'): ?>
+                                                                        <form id="<?php echo e('reject_'.$appointment->id); ?>" method="post" action="">
+                                                                            <?php echo csrf_field(); ?>
+                                                                            <?php echo method_field('PATCH'); ?>
+                                                                            <input type="hidden" name="order_status" value="2">
+                                                                            <a class="dropdown-item" style="cursor: pointer;" onclick="document.getElementById('<?php echo e('reject_'.$appointment->id); ?>').submit()">Reject</a>
+                                                                        </form>
+                                                                    <?php endif; ?>
+                                                                    <?php if($appointment->status != 'Confirm'): ?>
+                                                                        <form id="<?php echo e('confirm_'.$appointment->id); ?>" method="post" action="">
+                                                                            <?php echo csrf_field(); ?>
+                                                                            <?php echo method_field('PATCH'); ?>
+                                                                            <input type="hidden" name="order_status" value="1">
+                                                                            <a class="dropdown-item" style="cursor: pointer;" onclick="document.getElementById('<?php echo e('confirm_'.$appointment->id); ?>').submit()">Confirm</a>
+                                                                        </form>
+                                                                    <?php endif; ?>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </tbody>

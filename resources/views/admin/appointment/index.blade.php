@@ -32,7 +32,7 @@
 													<th>Client Name</th>
 													<th>Apointment Time</th>
 													<th>Status</th>
-                                                    <th>Action</th>
+                                                    <th class="text-center">Action</th>
 												</tr>
 											</thead>
                                             <tbody>
@@ -65,6 +65,31 @@
                                                         @if($appointment->status == 'Reject')
                                                             <td><span class="badge badge-pill bg-danger-light">{{ $appointment->status }}</span></td>
                                                         @endif
+                                                        <td class="text-center">
+                                                            <div class="dropdown d-inline-block">
+                                                                <a class="dropdown-toggle arrow-none" id="dLabel11" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                                                    <i class="las la-ellipsis-v font-20 text-muted"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel11">
+                                                                    @if($appointment->status != 'Reject')
+                                                                        <form id="{{ 'reject_'.$appointment->id }}" method="post" action="">
+                                                                            @csrf
+                                                                            @method('PATCH')
+                                                                            <input type="hidden" name="order_status" value="2">
+                                                                            <a class="dropdown-item" style="cursor: pointer;" onclick="document.getElementById('{{'reject_'.$appointment->id}}').submit()">Reject</a>
+                                                                        </form>
+                                                                    @endif
+                                                                    @if($appointment->status != 'Confirm')
+                                                                        <form id="{{ 'confirm_'.$appointment->id }}" method="post" action="">
+                                                                            @csrf
+                                                                            @method('PATCH')
+                                                                            <input type="hidden" name="order_status" value="1">
+                                                                            <a class="dropdown-item" style="cursor: pointer;" onclick="document.getElementById('{{'confirm_'.$appointment->id}}').submit()">Confirm</a>
+                                                                        </form>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
