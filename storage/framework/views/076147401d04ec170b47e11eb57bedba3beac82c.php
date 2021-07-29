@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
 			<!-- Page Wrapper -->
             <div class="page-wrapper">
@@ -69,7 +67,7 @@
 											<i class="fe fe-money"></i>
 										</span>
 										<div class="dash-count">
-											<h3>485</h3>
+											<h3><?php echo e(count($appointments)); ?></h3>
 										</div>
 									</div>
 									<div class="dash-widget-info">
@@ -196,28 +194,34 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../assets_admin/img/doctors/doctor-thumb-01.jpg" alt="User Image"></a>
-															<a href="profile">Dr. Ruby Perrin</a>
-														</h2>
-													</td>
-													<td>Dental</td>
-													<td>
-														<h2 class="table-avatar">
-															<a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="../assets_admin/img/patients/patient1.jpg" alt="User Image"></a>
-															<a href="profile">Charlene Reed </a>
-														</h2>
-													</td>
-													<td>9 Nov 2019 <span class="text-primary d-block">11.00 AM - 11.15 AM</span></td>
-													<td>
-														<div class="status-toggle">
-															<input type="checkbox" id="status_1" class="check" checked>
-															<label for="status_1" class="checktoggle">checkbox</label>
-														</div>
-													</td>
-												</tr>
+                                                <?php $__currentLoopData = $appointments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $appointment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <tr>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <?php if(isset($appointment->lawyer->image)): ?>
+                                                                    <a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$appointment->lawyer->image)); ?>" alt="User Image"></a>
+                                                                <?php endif; ?>
+                                                                <a href="profile"><?php echo e($appointment->lawyer->name); ?></a>
+                                                            </h2>
+                                                        </td>
+                                                        <td><?php echo e($appointment->lawyerType->name); ?></td>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <?php if(isset($appointment->user->image)): ?>
+                                                                    <a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$appointment->user->image)); ?>" alt="User Image"></a>
+                                                                <?php endif; ?>
+                                                                <a href="profile"><?php echo e($appointment->user->name); ?></a>
+                                                            </h2>
+                                                        </td>
+                                                        <td><?php echo e($appointment->appointment_date); ?> <span class="text-primary d-block"><?php echo e($appointment->appointment_time); ?></span></td>
+                                                        <td>
+                                                            <div class="status-toggle">
+                                                                <input type="checkbox" id="status_1" class="check" checked>
+                                                                <label for="status_1" class="checktoggle">checkbox</label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 											</tbody>
 										</table>
 									</div>

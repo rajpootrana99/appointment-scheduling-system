@@ -1,5 +1,5 @@
 <script src="assets/js/jquery.min.js"></script>
-		
+
 		<!-- Bootstrap Core JS -->
 		<script src="assets/js/popper.min.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
@@ -20,21 +20,26 @@
 			<script src="assets/plugins/fancybox/jquery.fancybox.min.js"></script>
 		<!-- Dropzone JS -->
 		<script src="assets/plugins/dropzone/dropzone.min.js"></script>
-		
+
 		<!-- Bootstrap Tagsinput JS -->
 		<script src="assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
-		
+
 		<!-- Profile Settings JS -->
 		<script src="assets/js/profile-settings.js"></script>
 		<!-- Circle Progress JS -->
 		<script src="assets/js/circle-progress.min.js"></script>
 		<!-- Slick JS -->
 		<script src="assets/js/slick.js"></script>
-		
-		<!-- Custom JS -->
+
+
+<!-- Custom JS -->
 		<script src="assets/js/script.js"></script>
 		<?php if(Route::is(['map-grid','map-list'])): ?>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6adZVdzTvBpE2yBRK8cDfsss8QXChK0I"></script>
 		<script src="assets/js/map.js"></script>
 		<?php endif; ?>
+
+
+
+
 <?php /**PATH D:\Workspace\appointment-scheduling-system\resources\views/layout/partials/footer-scripts.blade.php ENDPATH**/ ?>

@@ -116,7 +116,7 @@
 				<!-- User Menu -->
 				<li class="nav-item dropdown has-arrow">
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-						<span class="user-img"><img class="rounded-circle" src="{{ asset('storage/'.Auth::user()->image) }}" width="31" alt="Ryan Taylor"></span>
+						<span class="user-img"><img class="rounded-circle" src="{{ asset('storage/'.Auth::user()->image) }}" width="31" alt=""></span>
 					</a>
 					<div class="dropdown-menu">
 						<div class="user-header">

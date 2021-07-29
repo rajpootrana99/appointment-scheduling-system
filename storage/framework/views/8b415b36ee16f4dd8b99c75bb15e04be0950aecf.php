@@ -7,10 +7,14 @@
 			<!-- Logo -->
 			<div class="header-left">
 				<a href="<?php echo e(route('admin')); ?>" class="logo">
-					<img src="<?php echo e(asset('storage/'.$setting['logo'])); ?>" alt="Logo" width="300" height="50">
+                    <?php if(isset($setting['logo'])): ?>
+					    <img src="<?php echo e(asset('storage/'.$setting['logo'])); ?>" alt="Logo" width="300" height="50">
+                    <?php endif; ?>
 				</a>
 				<a href="<?php echo e(route('admin')); ?>" class="logo logo-small">
-					<img src="<?php echo e(asset('storage/'.$setting['logo'])); ?>" alt="Logo" width="300" height="50">
+                    <?php if(isset($setting['logo'])): ?>
+					    <img src="<?php echo e(asset('storage/'.$setting['logo'])); ?>" alt="Logo" width="300" height="50">
+                    <?php endif; ?>
                     <h4>Akram Khan</h4>
 				</a>
 			</div>
@@ -112,7 +116,7 @@
 				<!-- User Menu -->
 				<li class="nav-item dropdown has-arrow">
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-						<span class="user-img"><img class="rounded-circle" src="<?php echo e(asset('storage/'.Auth::user()->image)); ?>" width="31" alt="Ryan Taylor"></span>
+						<span class="user-img"><img class="rounded-circle" src="<?php echo e(asset('storage/'.Auth::user()->image)); ?>" width="31" alt=""></span>
 					</a>
 					<div class="dropdown-menu">
 						<div class="user-header">

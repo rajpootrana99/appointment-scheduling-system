@@ -22,14 +22,18 @@
 							</span>
 						</a>
 						<a href="<?php echo e(route('index')); ?>" class="navbar-brand logo">
-							<img src="<?php echo e(asset('storage/'.$setting['logo'])); ?>" alt="Logo" width="80" height="50">
+                            <?php if(isset($setting['logo'])): ?>
+							    <img src="<?php echo e(asset('storage/'.$setting['logo'])); ?>" alt="Logo" width="80" height="50">
+                            <?php endif; ?>
 						</a>
 					</div>
 					<div class="main-menu-wrapper">
 						<div class="menu-header">
 							<a href="<?php echo e(route('index')); ?>" class="menu-logo">
-								<img src="<?php echo e(asset('storage/'.$setting['logo'])); ?>" alt="Logo" width="80" height="50" class="img-fluid">
-							</a>
+                                <?php if(isset($setting['logo'])): ?>
+								    <img src="<?php echo e(asset('storage/'.$setting['logo'])); ?>" alt="Logo" width="80" height="50" class="img-fluid">
+                                <?php endif; ?>
+                            </a>
 							<a id="menu_close" class="menu-close" href="javascript:void(0);">
 								<i class="fas fa-times"></i>
 							</a>

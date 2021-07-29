@@ -41,4 +41,13 @@ class User extends Authenticatable
     public function lawyerInformation(){
         return $this->belongsTo(LawyerInformation::class);
     }
+
+    public function userAppointments(){
+        return $this->hasMany(Appointment::class, 'user_id', 'id');
+    }
+
+    public function lawyerAppointments(){
+        return $this->hasMany(Appointment::class, 'lawyer_id', 'id');
+    }
+
 }

@@ -54,6 +54,7 @@ Route::middleware(['role:user', 'auth'])->group(function () {
     Route::get('/favourites', 'User\UserController@favourites')->name('favourites');
     Route::get('/profile-settings', 'User\UserController@profileSettings')->name('profile-settings');
     Route::get('/change-user-password', 'User\UserController@changeUserPassword')->name('change-user-password');
+    Route::post('appointment/store', 'User\AppointmentController@store');
 
 });
 

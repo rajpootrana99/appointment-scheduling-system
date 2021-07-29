@@ -12,6 +12,8 @@
 <?php echo $__env->make('layout.partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php endif; ?>
 <?php echo $__env->make('layout.partials.footer-scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+
   </body>
 </html>
 <script>
@@ -22,8 +24,9 @@ $(document).ready(function(){
    $(this).addClass("active");
    $('.has-submenu a').removeClass("active");
    $('.has-submenu a').addClass("active");
-   
+
    //$(this).toggleClass("active");
  });*/
 });
-</script><?php /**PATH D:\Workspace\appointment-scheduling-system\resources\views/layout/mainlayout.blade.php ENDPATH**/ ?>
+</script>
+<?php /**PATH D:\Workspace\appointment-scheduling-system\resources\views/layout/mainlayout.blade.php ENDPATH**/ ?>
