@@ -357,7 +357,7 @@
                     var button = $(event.relatedTarget)
                     var lawyer_id = button.data('lawyer')
                     var lawyer_type_id = button.data('type')
-                    console.log('hello')
+                    console.log(lawyer_type_id)
                     var modal = $(this)
                     modal.find('.modal-body #lawyer_id').val(lawyer_id);
                     modal.find('.modal-body #lawyer_type_id').val(lawyer_type_id);

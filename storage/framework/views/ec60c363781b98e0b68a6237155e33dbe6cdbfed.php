@@ -173,13 +173,13 @@
                     }else {
                         $('#book_lawyer_form')[0].reset();
                         $('#book_lawyer').modal('hide')
-                        alert("Appointment Booked ")
+                        alert("Appointment Updated Successfully ")
                     }
                 },
                 error: function (error){
                     console.log(error)
                     $('#book_lawyer').modal('show')
-                    alert("Appointment not booked")
+                    alert("Appointment not updated")
                 }
             });
         });

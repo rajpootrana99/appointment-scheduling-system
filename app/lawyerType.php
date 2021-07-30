@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class lawyerType extends Model
 {
@@ -16,5 +17,9 @@ class lawyerType extends Model
 
     public function lawyerInformations(){
         return $this->hasMany(LawyerInformation::class);
+    }
+
+    public function appointments(){
+        return $this->hasMany(Appointment::class);
     }
 }

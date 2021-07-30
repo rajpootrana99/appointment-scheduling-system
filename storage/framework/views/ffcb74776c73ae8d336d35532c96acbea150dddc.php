@@ -125,11 +125,11 @@
                                                                         <td>
                                                                             <h2 class="table-avatar">
                                                                                 <?php if(isset($appointment->lawyer->image)): ?>
-                                                                                    <a href="<?php echo e(route('lawyer.show', ['lawyer' => $appointment->lawyer->id])); ?>" class="avatar avatar-sm mr-2">
+                                                                                    <a href="<?php echo e(route('lawyers.show', ['lawyer' => $appointment->lawyer->id])); ?>" class="avatar avatar-sm mr-2">
                                                                                         <img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$appointment->lawyer->image)); ?>" alt="User Image">
                                                                                     </a>
                                                                                 <?php endif; ?>
-                                                                                <a href="<?php echo e(route('lawyer.show', ['lawyer' => $appointment->lawyer->id])); ?>"><?php echo e($appointment->lawyer->name); ?> <span><?php echo e($appointment->lawyerType->name); ?></span></a>
+                                                                                <a href="<?php echo e(route('lawyers.show', ['lawyer' => $appointment->lawyer->id])); ?>"><?php echo e($appointment->lawyer->name); ?> <span><?php echo e($appointment->lawyerType->name); ?></span></a>
                                                                             </h2>
                                                                         </td>
                                                                         <td><?php echo e($appointment->appointment_date); ?> <span class="d-block text-info"><?php echo e($appointment->appointment_time); ?></span></td>
