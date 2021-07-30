@@ -183,15 +183,39 @@
                                                                         </h2>
                                                                     </td>
                                                                     <td><?php echo e($appointment->appointment_date); ?> <span class="d-block text-info"><?php echo e($appointment->appointment_time); ?></span></td>
-                                                                    <td><?php echo e($appointment->status); ?></td>
+                                                                    <?php if($appointment->status == 'Pending'): ?>
+                                                                        <td><span class="badge badge-pill bg-info-light"><?php echo e($appointment->status); ?></span></td>
+                                                                    <?php endif; ?>
+                                                                    <?php if($appointment->status == 'Confirm'): ?>
+                                                                        <td><span class="badge badge-pill bg-success-light"><?php echo e($appointment->status); ?></span></td>
+                                                                    <?php endif; ?>
+                                                                    <?php if($appointment->status == 'Reject'): ?>
+                                                                        <td><span class="badge badge-pill bg-danger-light"><?php echo e($appointment->status); ?></span></td>
+                                                                    <?php endif; ?>
                                                                     <td class="text-center">
-                                                                        <div class="table-action">
-                                                                            <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                                                                <i class="fas fa-check"></i> Accept
+                                                                        <div class="table-action row">
+                                                                            <a href="#book_lawyer" data-date="<?php echo e($appointment->appointment_date); ?>"
+                                                                               data-time="<?php echo e($appointment->appointment_time); ?>"
+                                                                               data-id="<?php echo e($appointment->id); ?>" data-toggle="modal"
+                                                                               class="btn btn-sm bg-info-light col-4">
+                                                                                <i class="fas fa-edit"></i> Edit
                                                                             </a>
-                                                                            <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                                                                <i class="fas fa-times"></i> Cancel
-                                                                            </a>
+                                                                            <?php if($appointment->status != 'Reject'): ?>
+                                                                                <form id="<?php echo e('reject_'.$appointment->id); ?>" method="post" action="<?php echo e(route('appointment.updateStatus', ['appointment' => $appointment])); ?>">
+                                                                                    <?php echo csrf_field(); ?>
+                                                                                    <?php echo method_field('PATCH'); ?>
+                                                                                    <input type="hidden" name="status" value="2">
+                                                                                    <a class="btn btn-sm bg-danger-light ml-2" style="cursor: pointer;" onclick="document.getElementById('<?php echo e('reject_'.$appointment->id); ?>').submit()"><i class="fas fa-times"></i> Reject</a>
+                                                                                </form>
+                                                                            <?php endif; ?>
+                                                                            <?php if($appointment->status != 'Confirm'): ?>
+                                                                                <form id="<?php echo e('confirm_'.$appointment->id); ?>" method="post" action="<?php echo e(route('appointment.updateStatus', ['appointment' => $appointment])); ?>">
+                                                                                    <?php echo csrf_field(); ?>
+                                                                                    <?php echo method_field('PATCH'); ?>
+                                                                                    <input type="hidden" name="status" value="1">
+                                                                                    <a class="btn btn-sm bg-success-light ml-2" style="cursor: pointer;" onclick="document.getElementById('<?php echo e('confirm_'.$appointment->id); ?>').submit()"><i class="fas fa-check"></i> Confirm</a>
+                                                                                </form>
+                                                                            <?php endif; ?>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -216,6 +240,85 @@
 
     </div>
     <!-- /Page Content -->
+    <div class="modal fade" id="book_lawyer" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Appointment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="book_lawyer_form">
+                        <?php echo csrf_field(); ?>
+                        <div class="row form-row">
+                            <div class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <input type="hidden" id="id" name="id">
+                                    <label>Select Date</label>
+                                    <input type="date" name="appointment_date" id="appointment_date" class="form-control">
+                                    <span class="text-danger error-text appointment_date_error"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Select Time</label>
+                                    <input type="time" name="appointment_time" id="appointment_time" class="form-control">
+                                    <span class="text-danger error-text appointment_time_error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function (){
+            $('#book_lawyer').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget)
+                var appointment_date = button.data('date')
+                var appointment_time = button.data('time')
+                var id = button.data('id')
+                var modal = $(this)
+                modal.find('.modal-body #appointment_date').val(appointment_date);
+                modal.find('.modal-body #appointment_time').val(appointment_time);
+                modal.find('.modal-body #id').val(id);
+            });
+            $('#book_lawyer_form').on('submit', function (e){
+                e.preventDefault();
+                $('#book_lawyer').modal('show')
+                $.ajax({
+                    type: "post",
+                    url: "appointment",
+                    data: $('#book_lawyer_form').serialize(),
+                    dataType:'json',
+                    beforeSend:function (){
+                        $(document).find('span.error-text').text('');
+                    },
+                    success: function (response) {
+                        if (response.status == 0){
+                            $('#book_lawyer').modal('show')
+                            $.each(response.error, function (prefix, val){
+                                $('span.'+prefix+'_error').text(val[0]);
+                            });
+                        }else {
+                            $('#book_lawyer_form')[0].reset();
+                            $('#book_lawyer').modal('hide')
+                            alert("Appointment Updated Successfully ")
+                        }
+                    },
+                    error: function (error){
+                        console.log(error)
+                        $('#book_lawyer').modal('show')
+                        alert("Appointment not updated")
+                    }
+                });
+            });
+        });
+    </script>
 <?php $__env->stopSection(); ?>
 
 

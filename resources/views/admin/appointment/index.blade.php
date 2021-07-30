@@ -71,19 +71,20 @@
                                                                     <i class="las la-ellipsis-v font-20 text-muted"></i>
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel11">
+                                                                    <a href="#book_lawyer" data-date="{{ $appointment->appointment_date }}" data-time="{{ $appointment->appointment_time }}" data-id="{{ $appointment->id }}" data-toggle="modal" class="dropdown-item">Edit</a>
                                                                     @if($appointment->status != 'Reject')
-                                                                        <form id="{{ 'reject_'.$appointment->id }}" method="post" action="">
+                                                                        <form id="{{ 'reject_'.$appointment->id }}" method="post" action="{{ route('appointment.updateStatus', ['appointment' => $appointment]) }}">
                                                                             @csrf
                                                                             @method('PATCH')
-                                                                            <input type="hidden" name="order_status" value="2">
+                                                                            <input type="hidden" name="status" value="2">
                                                                             <a class="dropdown-item" style="cursor: pointer;" onclick="document.getElementById('{{'reject_'.$appointment->id}}').submit()">Reject</a>
                                                                         </form>
                                                                     @endif
                                                                     @if($appointment->status != 'Confirm')
-                                                                        <form id="{{ 'confirm_'.$appointment->id }}" method="post" action="">
+                                                                        <form id="{{ 'confirm_'.$appointment->id }}" method="post" action="{{ route('appointment.updateStatus', ['appointment' => $appointment]) }}">
                                                                             @csrf
                                                                             @method('PATCH')
-                                                                            <input type="hidden" name="order_status" value="1">
+                                                                            <input type="hidden" name="status" value="1">
                                                                             <a class="dropdown-item" style="cursor: pointer;" onclick="document.getElementById('{{'confirm_'.$appointment->id}}').submit()">Confirm</a>
                                                                         </form>
                                                                     @endif
@@ -107,4 +108,82 @@
 
         </div>
 		<!-- /Main Wrapper -->
+<div class="modal fade" id="book_lawyer" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Appointment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="book_lawyer_form">
+                    @csrf
+                    <div class="row form-row">
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <input type="hidden" id="id" name="id">
+                                <label>Select Date</label>
+                                <input type="date" name="appointment_date" id="appointment_date" class="form-control">
+                                <span class="text-danger error-text appointment_date_error"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Select Time</label>
+                                <input type="time" name="appointment_time" id="appointment_time" class="form-control">
+                                <span class="text-danger error-text appointment_time_error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function (){
+        $('#book_lawyer').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var appointment_date = button.data('date')
+            var appointment_time = button.data('time')
+            var id = button.data('id')
+            var modal = $(this)
+            modal.find('.modal-body #appointment_date').val(appointment_date);
+            modal.find('.modal-body #appointment_time').val(appointment_time);
+            modal.find('.modal-body #id').val(id);
+        });
+        $('#book_lawyer_form').on('submit', function (e){
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "appointment",
+                data: $('#book_lawyer_form').serialize(),
+                dataType:'json',
+                beforeSend:function (){
+                    $(document).find('span.error-text').text('');
+                },
+                success: function (response) {
+                    if (response.status == 0){
+                        $('#book_lawyer').modal('show')
+                        $.each(response.error, function (prefix, val){
+                            $('span.'+prefix+'_error').text(val[0]);
+                        });
+                    }else {
+                        $('#book_lawyer_form')[0].reset();
+                        $('#book_lawyer').modal('hide')
+                        alert("Appointment Updated Successfully ")
+                    }
+                },
+                error: function (error){
+                    console.log(error)
+                    $('#book_lawyer').modal('show')
+                    alert("Appointment not updated")
+                }
+            });
+        });
+    });
+</script>
 @endsection

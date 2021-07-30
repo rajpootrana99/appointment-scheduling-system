@@ -22,6 +22,8 @@ Route::get('/', function () {
 Route::middleware(['role:admin', 'auth'])->group(function () {
     Route::get('/admin', 'Admin\AdminController@index')->name('admin');
     Route::get('admin/appointment', 'Admin\AppointmentController@index')->name('appointment.index');
+    Route::post('admin/appointment', 'Admin\AppointmentController@update')->name('appointment.update');
+    Route::patch('admin/appointment/updateStatus/{appointment}', 'Admin\AppointmentController@updateStatus')->name('appointment.updateStatus');
     Route::resource('admin/lawyerType', 'Admin\LawyerTypeController');
     Route::post('admin/updateLawyerType', 'Admin\LawyerTypeController@updatelawyerType');
     Route::resource('admin/lawyerInformation', 'Admin\LawyerController');
@@ -38,6 +40,7 @@ Route::middleware(['role:admin', 'auth'])->group(function () {
 
 Route::middleware(['role:lawyer', 'auth'])->group(function () {
     Route::get('/lawyer', 'Lawyer\LawyerController@index')->name('lawyer');
+    Route::patch('/lawyer/updateStatus/{appointment}', 'Lawyer\LawyerController@updateStatus')->name('appointment.updateStatus');
     Route::get('/appointments', 'Lawyer\LawyerController@appointments')->name('appointments');
     Route::get('/schedule-timings', 'Lawyer\LawyerController@scheduleTimings')->name('schedule-timings');
     Route::get('/my-clients', 'Lawyer\LawyerController@myClients')->name('my-clients');

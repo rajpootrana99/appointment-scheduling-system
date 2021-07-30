@@ -75,4 +75,11 @@ class LawyerController extends Controller
             'reviews' => $reviews,
         ]);
     }
+
+    public function updateStatus(Appointment $appointment, Request $request){
+        $appointment->update([
+            'status' => $request->status,
+        ]);
+        return redirect(route('lawyer'));
+    }
 }
