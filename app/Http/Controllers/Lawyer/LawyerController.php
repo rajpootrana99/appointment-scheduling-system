@@ -6,6 +6,7 @@ use App\Appointment;
 use App\Http\Controllers\Controller;
 use App\LawyerInformation;
 use App\Review;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,8 +57,12 @@ class LawyerController extends Controller
         ]);
     }
 
-    public function clientProfile(){
-        return view('lawyer.client-profile');
+    public function clientProfile(User $user){
+        $lawyers = Appointment::where('user_id', $user->id)->distinct()->take(2)->get();
+        return view('lawyer.client-profile', [
+            'user' => $user,
+            'lawyers' => $lawyers,
+        ]);
     }
 
     public function changeLawyerPassword(){

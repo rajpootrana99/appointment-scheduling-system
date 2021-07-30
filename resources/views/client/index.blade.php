@@ -125,11 +125,11 @@
                                                                         <td>
                                                                             <h2 class="table-avatar">
                                                                                 @if(isset($appointment->lawyer->image))
-                                                                                    <a href="{{ route('lawyer.show', ['lawyer' => $appointment->lawyer->id]) }}" class="avatar avatar-sm mr-2">
+                                                                                    <a href="{{ route('lawyers.show', ['lawyer' => $appointment->lawyer->id]) }}" class="avatar avatar-sm mr-2">
                                                                                         <img class="avatar-img rounded-circle" src="{{ asset('storage/'.$appointment->lawyer->image) }}" alt="User Image">
                                                                                     </a>
                                                                                 @endif
-                                                                                <a href="{{ route('lawyer.show', ['lawyer' => $appointment->lawyer->id]) }}">{{ $appointment->lawyer->name }} <span>{{ $appointment->lawyerType->name }}</span></a>
+                                                                                <a href="{{ route('lawyers.show', ['lawyer' => $appointment->lawyer->id]) }}">{{ $appointment->lawyer->name }} <span>{{ $appointment->lawyerType->name }}</span></a>
                                                                             </h2>
                                                                         </td>
                                                                         <td>{{ $appointment->appointment_date }} <span class="d-block text-info">{{ $appointment->appointment_time }}</span></td>

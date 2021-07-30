@@ -177,9 +177,9 @@
                                                                     <td>
                                                                         <h2 class="table-avatar">
                                                                             @if(isset($appointment->user->image))
-                                                                                <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ asset('storage/'.$appointment->user->image) }}" alt="User Image"></a>
+                                                                                <a href="{{ route('client-profile.show', ['user' => $appointment->user]) }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ asset('storage/'.$appointment->user->image) }}" alt="User Image"></a>
                                                                             @endif
-                                                                            <a href="patient-profile">{{ $appointment->user->name }}</a>
+                                                                            <a href="{{ route('client-profile.show', ['user' => $appointment->user]) }}">{{ $appointment->user->name }}</a>
                                                                         </h2>
                                                                     </td>
                                                                     <td>{{ $appointment->appointment_date }} <span class="d-block text-info">{{ $appointment->appointment_time }}</span></td>

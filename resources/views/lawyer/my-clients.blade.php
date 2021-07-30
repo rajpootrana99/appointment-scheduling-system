@@ -108,13 +108,13 @@
                                             <div class="card-body">
                                                 <div class="pro-widget-content">
                                                     <div class="profile-info-widget">
-                                                        <a href="client-profile" class="booking-doc-img">
+                                                        <a href="{{ route('client-profile.show', ['user' => $appointment->user]) }}" class="booking-doc-img">
                                                             @if(isset($appointment->user->image))
                                                                 <img src="{{ asset('storage/'.$appointment->user->image) }}" alt="User Image">
                                                             @endif
                                                         </a>
                                                         <div class="profile-det-info">
-                                                            <h3><a href="client-profile">{{ $appointment->user->name }}</a></h3>
+                                                            <h3><a href="{{ route('client-profile.show', ['user' => $appointment->user]) }}">{{ $appointment->user->name }}</a></h3>
 
                                                             <div class="patient-details">
                                                                 <h5><b>Client ID :</b> C00{{ $appointment->user->id }}</h5>

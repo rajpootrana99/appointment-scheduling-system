@@ -32,13 +32,17 @@
 									<div class="pro-widget-content">
 										<div class="profile-info-widget">
 											<a href="#" class="booking-doc-img">
-												<img src="assets/img/patients/patient.jpg" alt="User Image">
+                                                <?php if(isset($user->image)): ?>
+                                                    <img src="<?php echo e(asset('storage/'.$user->image)); ?>" alt="User Image">
+                                                <?php else: ?>
+                                                    <img src="<?php echo e(asset('assets/img/patients/patient.jpg')); ?>" alt="User Image">
+                                                <?php endif; ?>
 											</a>
 											<div class="profile-det-info">
-												<h3>Sohaib Zafar</h3>
+												<h3><?php echo e($user->name); ?></h3>
 
 												<div class="patient-details">
-													<h5><b>Client ID :</b> PT0016</h5>
+													<h5><b>Client ID :</b> C00<?php echo e($user->id); ?></h5>
 												</div>
 											</div>
 										</div>
@@ -53,30 +57,24 @@
 									<h4 class="card-title">Last Booking</h4>
 								</div>
 								<ul class="list-group list-group-flush">
-									<li class="list-group-item">
-										<div class="media align-items-center">
-											<div class="mr-3">
-												<img alt="Image placeholder" src="assets/img/doctors/doctor-thumb-02.jpg" class="avatar  rounded-circle">
-											</div>
-											<div class="media-body">
-												<h5 class="d-block mb-0">Akram Khan </h5>
-												<span class="d-block text-sm text-muted">Criminal Lawyer</span>
-												<span class="d-block text-sm text-muted">14 Nov 2019 5.00 PM</span>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="media align-items-center">
-											<div class="mr-3">
-												<img alt="Image placeholder" src="assets/img/doctors/doctor-thumb-02.jpg" class="avatar  rounded-circle">
-											</div>
-											<div class="media-body">
-												<h5 class="d-block mb-0">Asim Bajwa </h5>
-												<span class="d-block text-sm text-muted">Civil Lawyer</span>
-												<span class="d-block text-sm text-muted">12 Nov 2019 11.00 AM</span>
-											</div>
-										</div>
-									</li>
+                                    <?php $__currentLoopData = $lawyers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $lawyer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li class="list-group-item">
+                                            <div class="media align-items-center">
+                                                <div class="mr-3">
+                                                    <?php if(isset($lawyer->lawyer->image)): ?>
+                                                        <img alt="Image placeholder" src="<?php echo e(asset('storage/'.$lawyer->lawyer->image)); ?>" class="avatar  rounded-circle">
+                                                    <?php else: ?>
+                                                        <img alt="Image placeholder" src="<?php echo e(asset('assets/img/doctors/doctor-thumb-02.jpg')); ?>" class="avatar  rounded-circle">
+                                                    <?php endif; ?>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="d-block mb-0"><?php echo e($lawyer->lawyer->name); ?> </h5>
+                                                    <span class="d-block text-sm text-muted"><?php echo e($lawyer->lawyerType->name); ?></span>
+                                                    <span class="d-block text-sm text-muted"><?php echo e($lawyer->appointment_date); ?> <?php echo e($lawyer->appointment_time); ?></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 								</ul>
 							</div>
 							<!-- /Last Booking -->
@@ -106,54 +104,38 @@
 																	<th>Lawyer</th>
 																	<th>Appt Date</th>
 																	<th>Booking Date</th>
-																	<th>Follow Up</th>
 																	<th>Status</th>
 																	<th></th>
 																</tr>
 															</thead>
 															<tbody>
+                                                                <?php $__currentLoopData = $user->userAppointments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $appointment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 																<tr>
 																	<td>
 																		<h2 class="table-avatar">
-																			<a href="doctor-profile" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+																			<a href="<?php echo e(route('lawyers.show', ['lawyer' => $appointment->lawyer->id])); ?>" class="avatar avatar-sm mr-2">
+                                                                                <?php if(isset($appointment->lawyer->image)): ?>
+																				    <img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$appointment->lawyer->image)); ?>" alt="User Image">
+                                                                                <?php else: ?>
+																				    <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                                                                <?php endif; ?>
 																			</a>
-																			<a href="doctor-profile">Akram Khan <span>Criminal Lawyer</span></a>
+																			<a href="<?php echo e(route('lawyers.show', ['lawyer' => $appointment->lawyer->id])); ?>"><?php echo e($appointment->lawyer->name); ?> <span><?php echo e($appointment->lawyerType->name); ?></span></a>
 																		</h2>
 																	</td>
-																	<td>14 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
-																	<td>12 Nov 2019</td>
-																	<td>16 Nov 2019</td>
-																	<td><span class="badge badge-pill bg-success-light">Confirm</span></td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-																				<i class="far fa-edit"></i> Edit
-																			</a>
-																		</div>
-																	</td>
+																	<td><?php echo e($appointment->appointment_date); ?> <span class="d-block text-info"><?php echo e($appointment->appointment_time); ?></span></td>
+																	<td><?php echo e($appointment->created_at); ?></td>
+                                                                    <?php if($appointment->status == 'Pending'): ?>
+                                                                        <td><span class="badge badge-pill bg-info-light"><?php echo e($appointment->status); ?></span></td>
+                                                                    <?php endif; ?>
+                                                                    <?php if($appointment->status == 'Confirm'): ?>
+                                                                        <td><span class="badge badge-pill bg-success-light"><?php echo e($appointment->status); ?></span></td>
+                                                                    <?php endif; ?>
+                                                                    <?php if($appointment->status == 'Reject'): ?>
+                                                                        <td><span class="badge badge-pill bg-danger-light"><?php echo e($appointment->status); ?></span></td>
+                                                                    <?php endif; ?>
 																</tr>
-																<tr>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile">Asim Bajwa <span>Civil Lawyer</span></a>
-																		</h2>
-																	</td>
-																	<td>12 Nov 2019 <span class="d-block text-info">8.00 PM</span></td>
-																	<td>12 Nov 2019</td>
-																	<td>14 Nov 2019</td>
-																	<td><span class="badge badge-pill bg-success-light">Confirm</span></td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-																				<i class="far fa-edit"></i> Edit
-																			</a>
-																		</div>
-																	</td>
-																</tr>
+                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 															</tbody>
 														</table>
 													</div>

@@ -32,13 +32,17 @@
 									<div class="pro-widget-content">
 										<div class="profile-info-widget">
 											<a href="#" class="booking-doc-img">
-												<img src="assets/img/patients/patient.jpg" alt="User Image">
+                                                @if(isset($user->image))
+                                                    <img src="{{ asset('storage/'.$user->image) }}" alt="User Image">
+                                                @else
+                                                    <img src="{{ asset('assets/img/patients/patient.jpg') }}" alt="User Image">
+                                                @endif
 											</a>
 											<div class="profile-det-info">
-												<h3>Sohaib Zafar</h3>
+												<h3>{{ $user->name }}</h3>
 
 												<div class="patient-details">
-													<h5><b>Client ID :</b> PT0016</h5>
+													<h5><b>Client ID :</b> C00{{ $user->id }}</h5>
 												</div>
 											</div>
 										</div>
@@ -53,30 +57,24 @@
 									<h4 class="card-title">Last Booking</h4>
 								</div>
 								<ul class="list-group list-group-flush">
-									<li class="list-group-item">
-										<div class="media align-items-center">
-											<div class="mr-3">
-												<img alt="Image placeholder" src="assets/img/doctors/doctor-thumb-02.jpg" class="avatar  rounded-circle">
-											</div>
-											<div class="media-body">
-												<h5 class="d-block mb-0">Akram Khan </h5>
-												<span class="d-block text-sm text-muted">Criminal Lawyer</span>
-												<span class="d-block text-sm text-muted">14 Nov 2019 5.00 PM</span>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="media align-items-center">
-											<div class="mr-3">
-												<img alt="Image placeholder" src="assets/img/doctors/doctor-thumb-02.jpg" class="avatar  rounded-circle">
-											</div>
-											<div class="media-body">
-												<h5 class="d-block mb-0">Asim Bajwa </h5>
-												<span class="d-block text-sm text-muted">Civil Lawyer</span>
-												<span class="d-block text-sm text-muted">12 Nov 2019 11.00 AM</span>
-											</div>
-										</div>
-									</li>
+                                    @foreach($lawyers as $lawyer)
+                                        <li class="list-group-item">
+                                            <div class="media align-items-center">
+                                                <div class="mr-3">
+                                                    @if(isset($lawyer->lawyer->image))
+                                                        <img alt="Image placeholder" src="{{ asset('storage/'.$lawyer->lawyer->image) }}" class="avatar  rounded-circle">
+                                                    @else
+                                                        <img alt="Image placeholder" src="{{ asset('assets/img/doctors/doctor-thumb-02.jpg') }}" class="avatar  rounded-circle">
+                                                    @endif
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="d-block mb-0">{{ $lawyer->lawyer->name }} </h5>
+                                                    <span class="d-block text-sm text-muted">{{ $lawyer->lawyerType->name }}</span>
+                                                    <span class="d-block text-sm text-muted">{{ $lawyer->appointment_date }} {{ $lawyer->appointment_time }}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
 								</ul>
 							</div>
 							<!-- /Last Booking -->
@@ -106,54 +104,38 @@
 																	<th>Lawyer</th>
 																	<th>Appt Date</th>
 																	<th>Booking Date</th>
-																	<th>Follow Up</th>
 																	<th>Status</th>
 																	<th></th>
 																</tr>
 															</thead>
 															<tbody>
+                                                                @foreach($user->userAppointments as $appointment)
 																<tr>
 																	<td>
 																		<h2 class="table-avatar">
-																			<a href="doctor-profile" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+																			<a href="{{ route('lawyers.show', ['lawyer' => $appointment->lawyer->id]) }}" class="avatar avatar-sm mr-2">
+                                                                                @if(isset($appointment->lawyer->image))
+																				    <img class="avatar-img rounded-circle" src="{{ asset('storage/'.$appointment->lawyer->image) }}" alt="User Image">
+                                                                                @else
+																				    <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                                                                @endif
 																			</a>
-																			<a href="doctor-profile">Akram Khan <span>Criminal Lawyer</span></a>
+																			<a href="{{ route('lawyers.show', ['lawyer' => $appointment->lawyer->id]) }}">{{ $appointment->lawyer->name }} <span>{{ $appointment->lawyerType->name }}</span></a>
 																		</h2>
 																	</td>
-																	<td>14 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
-																	<td>12 Nov 2019</td>
-																	<td>16 Nov 2019</td>
-																	<td><span class="badge badge-pill bg-success-light">Confirm</span></td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-																				<i class="far fa-edit"></i> Edit
-																			</a>
-																		</div>
-																	</td>
+																	<td>{{ $appointment->appointment_date }} <span class="d-block text-info">{{ $appointment->appointment_time }}</span></td>
+																	<td>{{ $appointment->created_at }}</td>
+                                                                    @if($appointment->status == 'Pending')
+                                                                        <td><span class="badge badge-pill bg-info-light">{{ $appointment->status }}</span></td>
+                                                                    @endif
+                                                                    @if($appointment->status == 'Confirm')
+                                                                        <td><span class="badge badge-pill bg-success-light">{{ $appointment->status }}</span></td>
+                                                                    @endif
+                                                                    @if($appointment->status == 'Reject')
+                                                                        <td><span class="badge badge-pill bg-danger-light">{{ $appointment->status }}</span></td>
+                                                                    @endif
 																</tr>
-																<tr>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile">Asim Bajwa <span>Civil Lawyer</span></a>
-																		</h2>
-																	</td>
-																	<td>12 Nov 2019 <span class="d-block text-info">8.00 PM</span></td>
-																	<td>12 Nov 2019</td>
-																	<td>14 Nov 2019</td>
-																	<td><span class="badge badge-pill bg-success-light">Confirm</span></td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-																				<i class="far fa-edit"></i> Edit
-																			</a>
-																		</div>
-																	</td>
-																</tr>
+                                                                @endforeach
 															</tbody>
 														</table>
 													</div>

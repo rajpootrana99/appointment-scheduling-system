@@ -44,11 +44,10 @@ Route::middleware(['role:lawyer', 'auth'])->group(function () {
     Route::get('/appointments', 'Lawyer\LawyerController@appointments')->name('appointments');
     Route::get('/schedule-timings', 'Lawyer\LawyerController@scheduleTimings')->name('schedule-timings');
     Route::get('/my-clients', 'Lawyer\LawyerController@myClients')->name('my-clients');
-    Route::get('/client-profile', 'Lawyer\LawyerController@clientProfile')->name('client-profile');
+    Route::get('/client-profile/{user}', 'Lawyer\LawyerController@clientProfile')->name('client-profile.show');
     Route::get('/profile-setting', 'Lawyer\LawyerController@profileSettings')->name('profile-setting');
     Route::get('/change-lawyer-password', 'Lawyer\LawyerController@changeLawyerPassword')->name('change-lawyer-password');
     Route::get('/reviews', 'Lawyer\LawyerController@Reviews')->name('reviews');
-
 });
 
 /*****************CLIENT ROUTES*******************/

@@ -177,9 +177,9 @@
                                                                     <td>
                                                                         <h2 class="table-avatar">
                                                                             <?php if(isset($appointment->user->image)): ?>
-                                                                                <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$appointment->user->image)); ?>" alt="User Image"></a>
+                                                                                <a href="<?php echo e(route('client-profile.show', ['user' => $appointment->user])); ?>" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="<?php echo e(asset('storage/'.$appointment->user->image)); ?>" alt="User Image"></a>
                                                                             <?php endif; ?>
-                                                                            <a href="patient-profile"><?php echo e($appointment->user->name); ?></a>
+                                                                            <a href="<?php echo e(route('client-profile.show', ['user' => $appointment->user])); ?>"><?php echo e($appointment->user->name); ?></a>
                                                                         </h2>
                                                                     </td>
                                                                     <td><?php echo e($appointment->appointment_date); ?> <span class="d-block text-info"><?php echo e($appointment->appointment_time); ?></span></td>
