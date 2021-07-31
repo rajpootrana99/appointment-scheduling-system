@@ -25,6 +25,7 @@ Route::middleware(['role:admin', 'auth'])->group(function () {
     Route::post('admin/appointment', 'Admin\AppointmentController@update')->name('appointment.update');
     Route::patch('admin/appointment/updateStatus/{appointment}', 'Admin\AppointmentController@updateStatus')->name('appointment.updateStatus');
     Route::resource('admin/lawyerType', 'Admin\LawyerTypeController');
+    Route::get('admin/fetchLawyerType', 'Admin\LawyerTypeController@fetchLawyerType');
     Route::post('admin/updateLawyerType', 'Admin\LawyerTypeController@updatelawyerType');
     Route::resource('admin/lawyerInformation', 'Admin\LawyerController');
     Route::get('admin/client', 'Admin\ClientController@index')->name('client.index');

@@ -8,6 +8,7 @@ use App\Http\Traits\GeneralTraits;
 use App\LawyerType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use mysql_xdevapi\Exception;
 
 class LawyerTypeController extends Controller
 {
@@ -19,8 +20,12 @@ class LawyerTypeController extends Controller
      */
     public function index()
     {
+        return view('admin.lawyerTypes.index');
+    }
+
+    public function fetchLawyerType(){
         $lawyerTypes = LawyerType::all();
-        return view('admin.lawyerTypes.index', [
+        return response()->json([
             'lawyerTypes' => $lawyerTypes,
         ]);
     }
@@ -45,6 +50,7 @@ class LawyerTypeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'image' => 'required|image',
         ]);
         if (!$validator->passes()){
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
@@ -74,9 +80,21 @@ class LawyerTypeController extends Controller
      * @param  \App\LawyerType  $lawyerType
      * @return \Illuminate\Http\Response
      */
-    public function edit(LawyerType $lawyerType)
+    public function edit($lawyerType)
     {
-        //
+        $lawyerType = LawyerType::find($lawyerType);
+        if ($lawyerType){
+            return response()->json([
+                'status' => 200,
+                'lawyerType' => $lawyerType,
+            ]);
+        }
+        else {
+            return response()->json([
+                'status' => 404,
+                'lawyerType' => 'Employee Not Found',
+            ]);
+        }
     }
 
     /**
@@ -86,7 +104,7 @@ class LawyerTypeController extends Controller
      * @param  \App\LawyerType  $lawyerType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LawyerType $lawyerType)
+    public function update(Request $request, $lawyerType)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -94,10 +112,17 @@ class LawyerTypeController extends Controller
         if (!$validator->passes()){
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         }
-        $lawyerType->update($request->all());
-        $this->storeImage($lawyerType);
-        if ($lawyerType){
-            return response()->json(['status' => 1, 'msg' => 'Lawyer Type Updated Successfully']);
+        try {
+            $lawyerType = LawyerType::find($lawyerType);
+            $lawyerType->update($request->all());
+            $this->storeImage($lawyerType);
+            if ($lawyerType){
+                return response()->json(['status' => 1, 'msg' => 'Lawyer Type Updated Successfully']);
+            }
+        }catch (Exception $exception){
+            return response()->json([
+                'message' => $exception->getMessage(),
+            ]);
         }
     }
 
@@ -107,13 +132,20 @@ class LawyerTypeController extends Controller
      * @param  \App\LawyerType  $lawyerType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LawyerType $lawyerType)
+    public function destroy($lawyerType)
     {
+        $lawyerType = LawyerType::find($lawyerType);
         if($lawyerType->lawyerInformations()->first()){
-            return redirect(route('lawyerType.index'))->with('warning', 'Lawyer exist against this type');;
+            return response()->json([
+                'status' => 0,
+                'message' => 'Lawyer exist against this type',
+            ]);
         }
         $lawyerType->delete();
-        return redirect(route('lawyerType.index'))->with('success', 'Lawyer Type deleted successfully');;
+        return response()->json([
+            'status' => 1,
+            'message' => 'Lawyer Type Delete Successfully',
+        ]);
     }
 
     public function storeImage($lawyerType){
