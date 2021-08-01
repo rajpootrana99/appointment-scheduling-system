@@ -10,7 +10,7 @@
 								<!-- Footer Widget -->
 								<div class="footer-widget footer-about">
 									<div class="footer-logo">
-                                        @if(isset($setting['logo'])))
+                                        @if(isset($setting['logo']))
 										    <img src="{{ asset('storage/'.$setting['logo'])}}" height="80px" alt="logo">
                                         @endif
 									</div>
