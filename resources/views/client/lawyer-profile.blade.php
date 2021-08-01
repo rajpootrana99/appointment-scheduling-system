@@ -30,7 +30,7 @@
 								<div class="doc-info-left">
 									<div class="doctor-img">
                                         @if(isset($lawyer->user->image))
-										    <img src="{{ asset('storage./'.$lawyer->user->image) }}" class="img-fluid" alt="User Image">
+										    <img src="{{ asset('storage/'.$lawyer->user->image) }}" class="img-fluid" alt="User Image">
                                         @endif
                                     </div>
 									<div class="doc-info-cont">
