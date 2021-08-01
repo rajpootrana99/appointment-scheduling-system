@@ -207,10 +207,13 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.status == 0) {
-                        alert(response.message);
+                        alertify.set('notifier','position', 'top-right');
+                        alertify.success(response.message);
                         $('#delete_modal').modal('hide');
                     }
                     else {
+                        alertify.set('notifier','position', 'top-right');
+                        alertify.success(response.message);
                         fetchLawyerType();
                         $('#delete_modal').modal('hide');
                     }
@@ -227,7 +230,8 @@
                 url: 'lawyerType/'+lawyer_type_id+'/edit',
                 success: function (response) {
                     if (response.status == 404) {
-                        alert(response.message);
+                        alertify.set('notifier','position', 'top-right');
+                        alertify.success(response.message);
                         $('#edit_specialities_details').modal('hide');
                     }
                     else {
@@ -243,7 +247,6 @@
 
             var lawyer_type_id = $('#lawyer_type_id').val();
             let EditFormData = new FormData($('#edit_specialities_details_form')[0]);
-            console.log(EditFormData);
 
             $.ajax({
                 type: "post",
@@ -262,6 +265,8 @@
                             $('span.'+prefix+'_update_error').text(val[0]);
                         });
                     }else {
+                        alertify.set('notifier','position', 'top-right');
+                        alertify.success(response.message);
                         $('#edit_specialities_details_form')[0].reset();
                         $('#edit_specialities_details').modal('hide')
                         fetchLawyerType()
@@ -269,8 +274,10 @@
                 },
                 error: function (error){
                     console.log(error)
+                    alertify.set('notifier','position', 'top-right');
+                    alertify.success(error.message);
                     $('#edit_specialities_details').modal('show')
-                    alert(error.message)
+                    // alert(error.message)
                 }
             });
         })
@@ -294,16 +301,19 @@
                             $('span.'+prefix+'_error').text(val[0]);
                         });
                     }else {
+                        alertify.set('notifier','position', 'top-right');
+                        alertify.success(response.message);
                         $('#Add_Specialities_details_form')[0].reset();
                         $('#Add_Specialities_details').modal('hide')
-                        alert("Lawyer Type Add Successfully")
+                        // alert("Lawyer Type Add Successfully")
                         fetchLawyerType()
                     }
                 },
                 error: function (error){
-                    console.log(error)
+                    alertify.set('notifier','position', 'top-right');
+                    alertify.success(error.message);
                     $('#Add_Specialities_details').modal('show')
-                    alert("Lawyer Type not added")
+                    // alert("Lawyer Type not added")
                 }
             });
         });

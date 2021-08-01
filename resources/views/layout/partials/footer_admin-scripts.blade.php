@@ -33,3 +33,4 @@
 		<script src="../assets_admin/plugins/datatables/datatables.min.js"></script>
 		<!-- Custom JS -->
 		<script  src="../assets_admin/js/script.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>

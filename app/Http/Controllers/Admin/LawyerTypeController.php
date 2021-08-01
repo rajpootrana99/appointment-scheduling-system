@@ -58,7 +58,7 @@ class LawyerTypeController extends Controller
         $lawyerType = LawyerType::create($request->all());
         $this->storeImage($lawyerType);
         if ($lawyerType){
-            return response()->json(['status' => 1, 'msg' => 'Lawyer Type Added Successfully']);
+            return response()->json(['status' => 1, 'message' => 'Lawyer Type Added Successfully']);
         }
 //        return redirect(route('lawyerType.index'))->with('success', 'Lawyer Type created successfully');
     }
@@ -117,7 +117,7 @@ class LawyerTypeController extends Controller
             $lawyerType->update($request->all());
             $this->storeImage($lawyerType);
             if ($lawyerType){
-                return response()->json(['status' => 1, 'msg' => 'Lawyer Type Updated Successfully']);
+                return response()->json(['status' => 1, 'message' => 'Lawyer Type Updated Successfully']);
             }
         }catch (Exception $exception){
             return response()->json([

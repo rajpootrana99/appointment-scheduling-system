@@ -33,4 +33,5 @@
 		<script src="../assets_admin/plugins/datatables/datatables.min.js"></script>
 		<!-- Custom JS -->
 		<script  src="../assets_admin/js/script.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <?php /**PATH D:\Workspace\appointment-scheduling-system\resources\views/layout/partials/footer_admin-scripts.blade.php ENDPATH**/ ?>
